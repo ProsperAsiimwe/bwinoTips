@@ -1,0 +1,56 @@
+﻿@model BwinoTips.WebUI.Models.Tickets.TicketViewModel
+
+
+
+@{
+    ViewBag.Title = "Bwino Tips: Confirm Ticket";
+    string action, cancel_url, buttonText, instr, glyph;
+    bool isAdmin = PageData["isAdmin"];
+    cancel_url = Url.Action("Index", new { returnUrl = "/products" });
+    action = "Checkout";
+    buttonText = "Complete Ticket";
+    instr = "Complete the form below and click complete ticket";
+    glyph = "fa fa-plus";
+}
+
+<div class="col-md-12 col-lg-12">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">Confirm Ticket</h6>
+                </div>
+      
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="skin-flat">
+                <div class="row">                  
+                    <div class="col-sm-12">
+
+                        @Html.ValidationSummary(true)
+                        @using (var f = Html.Bootstrap().Begin(new Form(action)))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.TicketId)
+                            @Html.HiddenFor(m => m.TotalAmount)
+
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                   @f.FormGroup().DropDownListFromEnumFor(p => p.TicketType).Class("form-control").Label().HtmlAttributes(new { required = "" })
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-success btn-block">Confirm</button>
+                        }
+
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

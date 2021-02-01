@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Chat";
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="chat-container row m-0">
+
+    <div class="tab-content chat-panel">
+       
+        <div class="tab-pane" role="tabpanel" aria-labelledby="list-item2-tab">
+          
+            <div class="messenger-dialog row m-0">
+                <div class="messenger-dialog__area">
+                   
+                    <div class="message-content message-content-scroll bg-text-green">
+                        <div class="position-relative">
+                            <div class="date">
+                                <hr><span>Yesterday</span><hr>
+                            </div>
+                            <div class="message">
+                                <img class="avatar" src="assets/dist/img/avatar-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
+                                <div class="text-main">
+                                    <span class="time-ago">09:46 AM</span>
+                                    <div class="text-group">
+                                        <div class="text">
+                                            <p>It is a long established fact that a reader will be.</p>
+                                            <!--<a class="text-action" tabindex="0" role="button" data-container="body" data-toggle="popover" data-placement="top" data-content="<a href='#' title=''>Delete</a> <a href='' title='test add link'>Save to server</a>">
+                                                <div class="dot-icon"></div>
+                                            </a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message me">
+                                <div class="text-main">
+                                    <span class="time-ago">11:32 AM</span>
+                                    <div class="text-group me">
+                                        <div class="text me">
+                                            <p> By the readable content of a page when looking at its?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message">
+                                <img class="avatar" src="assets/dist/img/avatar-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
+                                <div class="text-main">
+                                    <span class="time-ago">02:56 PM</span>
+                                    <div class="text-group">
+                                        <div class="text">
+                                            <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message me">
+                                <div class="text-main">
+                                    <span class="time-ago">10:21 PM</span>
+                                    <div class="text-group me">
+                                        <div class="text me">
+                                            <p>Roger that boss!</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-group me">
+                                        <div class="text me">
+                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message">
+                                <img class="avatar" src="assets/dist/img/avatar-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
+                                <div class="text-main">
+                                    <span class="time-ago">11:07 PM</span>
+                                    <div class="text-group">
+                                        <div class="text">
+                                            <p> Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="date">
+                                <hr><span>Today</span><hr>
+                            </div><!--/.date-->
+                            <div class="message me">
+                                <div class="text-main">
+                                    <span>10:21 PM</span>
+                                    <div class="text-group me">
+                                        <div class="text me">
+                                            <p>There are many variations of passages of Lorem Ipsum available.</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-group me">
+                                        <div class="text text-img me">
+                                            <img src="assets/dist/img/user.jpg" class="img-fluid" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message">
+                                <img class="avatar" src="assets/dist/img/avatar-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
+                                <div class="text-main">
+                                    <span>11:07 PM</span>
+                                    <div class="text-group">
+                                        <div class="text">
+                                            <div class="attachment">
+                                                <button class="btn attach"><i class="material-icons md-18">insert_drive_file</i></button>
+                                                <div class="file">
+                                                    <h5><a href="#">Documentations.pdf</a></h5>
+                                                    <span>21kb Document</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message me">
+                                <div class="text-main">
+                                    <span><i class="material-icons">check</i>10:21 PM</span>
+                                    <div class="text-group me">
+                                        <div class="text me">
+                                            <p> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                            <div class="message">
+                                <img class="avatar" src="assets/dist/img/avatar-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
+                                <div class="text-main">
+                                    <div class="text-group">
+                                        <div class="text typing">
+                                            <div class="wave">
+                                                <span class="dot"></span>
+                                                <span class="dot"></span>
+                                                <span class="dot"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--/.message-->
+                        </div>
+                    </div>
+                    <div class="chat-area-bottom d-flex align-items-center">
+                        <form class="position-relative w-100">
+                            <textarea class="form-control emojionearea" placeholder="Type a message here..." rows="1"></textarea>
+                            <!--<button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>-->
+                            <button type="submit" class="btn send"><i class="material-icons">send</i></button>
+                        </form>
+                        <label>
+                            <input type="file">
+                            <span class="btn attach"><i class="material-icons">attach_file</i></span>
+                        </label>
+                    </div><!--/.chat area bottom-->
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="chat-overlay"></div>
+</div><!--/.chat container-->

@@ -1,0 +1,95 @@
+﻿@model BwinoTips.WebUI.Models.Exclusive.ExclusiveListViewModel
+@{
+    ViewBag.Title = "Welcome to Bwino Tips Uganda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string companyName = Settings.COMPANY_NAME;
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+    bool isMember = PageData["isMember"];
+}
+
+
+
+                      @if (isAdmin)
+                      {
+                        <div class="row">
+                            @Html.Action("GetRegStats", "Users")
+                        </div>
+
+                        <div class="row">
+                            @Html.Action("GetTipStats", "League")
+                        </div>
+
+                      }
+                      else if (isMember)
+                      {
+
+                        <div class="row">
+                            @Html.Action("ShowSubStatus", "Registration")
+                        </div>
+
+                        <div class="row">
+                            @Html.Action("ShowAllTickets", "Ticket")
+                        </div>                       
+                           
+                            }
+
+
+
+
+
+
+                            @*<!-- post wraper start-->
+                                <section class="block-wrapper mt-15 md-mb-30">
+                                    <div class="container">
+                                        <div class="row">
+                                            @if (isAdmin)
+                                        {
+                                        <!-- col end-->
+
+
+                                        <!-- col end-->
+
+                                            }
+                                            else if (isMember)
+
+                                            {
+
+                                                <div class="col-lg-8">
+                                                    <div class="contact-box ts-grid-box">
+                                                        <h3>Exclusive Tips</h3>
+                                                        <br />
+                                                        @Html.Action("ShowAllTips", "ExclusiveTip")
+
+                                                    </div><!-- grid box end -->
+
+
+                                                </div>
+                                        <!-- col end-->
+
+                                                <div class="col-lg-4">
+                                                    <div class="widgets ts-grid-item  widgets-populer-post">
+                                                        <h3 class="widgets-title">
+                                                            <span>Subscription Status</span>
+                                                        </h3>
+
+                                                        @Html.Action("ShowSubStatus", "Registration")
+
+                                                    </div>
+                                                    <!-- right sidebar end-->
+                                                </div>
+                                        <!-- col end-->
+
+                                            }
+
+
+                                        </div>
+                                        <!-- row end-->
+                                    </div>
+                                    <!-- container end-->
+                                </section>
+                                <!-- post wraper end-->*@
+
+
+
+                            @section Scripts {
+                            }

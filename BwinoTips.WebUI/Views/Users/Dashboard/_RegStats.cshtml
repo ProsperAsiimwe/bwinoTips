@@ -1,0 +1,41 @@
+﻿@model BwinoTips.WebUI.Models.Dashboard.MemberStatsModel
+
+
+
+
+<div class="col-md-6 col-lg-3">
+    <!--Outage warning-->
+    <div class="p-2 bg-warning text-black rounded mb-3 p-3 shadow-sm text-center position-relative overflow-hidden">
+        <div class="header-pretitle fs-11 font-weight-bold text-uppercase mb-2 text-white">Total Members</div>
+        <i class="decorative-icon fas fa fa-users opacity-25 fa-5x animated infinite pulse slower"></i>
+        <pre class="fs-30 bg-dark text-white rounded p-2 mb-0" style="text-align:center;"><code>@Model.TotalRequests</code></pre>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-3">
+    <!--Active users indicator-->
+    <div class="p-2 bg-success text-black rounded mb-3 p-3 shadow-sm text-center position-relative overflow-hidden">
+        <div class="header-pretitle fs-11 font-weight-bold text-uppercase mb-2 text-white">Active Subscriptions</div>
+        <i class="decorative-icon fas fa fa-smile-o opacity-25 fa-5x animated infinite pulse slower"></i>
+        <pre class="fs-30 bg-dark text-white rounded p-2 mb-0" style="text-align:center;"><code>@Model.TotalActive</code></pre>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-3">
+    <!--Active users indicator-->
+    <div class="p-2 bg-danger text-black rounded mb-3 p-3 shadow-sm text-center position-relative overflow-hidden">
+        <div class="header-pretitle fs-11 font-weight-bold text-uppercase mb-2 text-white">Expired Subscriptions</div>
+        <i class="decorative-icon fas fa fa-frown-o opacity-25 fa-5x animated infinite pulse slower"></i>
+        <pre class="fs-30 bg-dark text-white rounded p-2 mb-0" style="text-align:center;"><code>@Model.TotalExpired</code></pre>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-3">
+    <!--Active users indicator-->
+    <div class="p-2 bg-primary text-black rounded mb-3 p-3 shadow-sm text-center position-relative overflow-hidden">
+        <div class="header-pretitle fs-11 font-weight-bold text-uppercase mb-2 text-white">Unhandled complaints</div>
+        <i class="decorative-icon fas fa fa-exclamation-circle opacity-25 fa-5x animated infinite pulse slower"></i>
+        <pre class="fs-30 bg-dark text-white rounded p-2 mb-0" style="text-align:center;"><code>0</code></pre>
+    </div>
+</div>
+

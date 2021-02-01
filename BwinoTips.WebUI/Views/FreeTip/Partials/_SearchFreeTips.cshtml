@@ -1,0 +1,61 @@
+﻿@model BwinoTips.WebUI.Models.Free.SearchFreeViewModel
+@using (Html.BeginForm("Index", "FreeTip", new { @class = "comment-form", id = "commentform" }))
+{    
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-3">
+                <div class="kf_commet_field">
+                    @Html.Bootstrap().TextBoxFor(m => m.HomeTeam).Placeholder().PrependIcon("fa fa-home")
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="kf_commet_field">
+                    @Html.Bootstrap().TextBoxFor(m => m.AwayTeam).Placeholder().PrependIcon("fa fa-handshake-o")
+                </div>
+            </div>
+
+            @*<div class="col-md-3">
+                <div class="kf_commet_field">
+                    @Html.Bootstrap().TextBoxFor(m => m.Date).HtmlAttributes(new { id = "datetimepicker1" })          
+                </div>
+            </div>*@
+
+            <div class="col-md-3">
+                <p class="form-submit">
+                    @Html.Bootstrap().SubmitButton().Text("Filter").Class("submit btn-1 theme-background").Name("method").Value("Filter").Style(ButtonStyle.Success)
+                </p>
+            </div>
+
+        </div>
+    </div>
+    
+}
+
+
+@section Scripts{
+
+
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js"></script>
+
+    <script>
+        $("#datetimepicker1").datetimepicker();
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

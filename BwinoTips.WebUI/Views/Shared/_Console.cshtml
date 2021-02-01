@@ -1,0 +1,196 @@
+﻿@{
+    string companyName = Settings.COMPANY_NAME;
+    string subNavLabel = ViewBag.SubNavLabel ?? "Actions";
+    bool isAuthenticated = (User.Identity.IsAuthenticated);
+    bool isAdmin = (isAuthenticated) && (PageData["isAdmin"]);
+    bool isMember = (isAuthenticated) && (PageData["isMember"]);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - @Settings.COMPANY_NAME</title>
+    @Html.Partial("Layout/_Head")
+    <style type="text/css">
+        body {
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="gray-background">
+
+    <div class="rgb-wrapper">
+
+        <!--Header 2 Wrap Start-->
+        <header class="rgb-header theme-background">
+            <div class="container">
+                <!--Logo Wrap Start-->
+                <div class="logo">
+                    <a href="@Url.Action("Index", "Home")"><img class="the-logo" src="~/Content/coreAssets/images/logo/shuaOddsLogoTrans.png" alt=""></a>
+                </div>
+                <!--Logo Wrap End-->
+                <!--Inner Header Wrap Start-->
+                <div class="rgb-inner-header">
+                    <!--Top Bar Wrap Start-->
+                    <div class="rgb-top-bar">
+                        <!--Popup Button Start-->
+                        @if (isAdmin || isMember)
+                        {
+                            <div class="rgb-popups-btn pull-right">
+
+                                @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link"><i class="fa fa-sign-out"></i>Sign Out</a>
+                                }
+                            </div>
+
+
+                        }
+                        else
+                        {
+                            <div class="rgb-popups-btn">
+                                @Html.Bootstrap().ActionLink("Sign In", "Login", "Account")
+                                @Html.Bootstrap().ActionLink("Become a member", "Index", "Registration").RouteValues(new { roleName = "members" })
+                            </div>
+
+                        }
+                        <!--Top Bar Contact Start-->
+
+                        @if (isAdmin || isMember)
+                        {
+                            <div class="top-bar-contact pull-right">
+                                <span class="tp-address">@Html.Action("GetLoginName", "Account")</span>
+
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="top-bar-contact">
+                                @*<span class="tp-address"><i class="fa fa-map-marker"></i>@Settings.COMPANY_ADDRESS</span>*@
+                                <span class="tp-contact"><i class="fa fa-phone"></i>Contact Us! @Settings.COMPANY_PHONE</span>
+                            </div>
+                <!--Top Bar Contact End-->
+                <!--Social Link Start-->
+                            <ul class="kode-social-link simple">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+
+                            </ul>
+                <!--Social Link End-->
+
+                        }
+
+
+                    </div>
+                    <!--Top Bar Wrap End-->
+                    <!--Navigation Wrap Start-->
+                    <div class="rgb-navigation-wrap">
+                        <!--navigation inner Wrap Start-->
+                        <div class="kode-navigation-wrapper">
+                            <nav class="navigation">
+                                <div class="menu-main-menu-container">
+                                    <ul>
+                                        @if (isAdmin)
+                                        {
+                                            @Html.Partial("Layout/_NavAdmin")
+
+                                        }
+                                        else if (isMember)
+                                        {
+
+                                            @Html.Partial("Layout/_NavMember")
+
+                                        }
+                                        else
+                                        {
+
+                                            @Html.Partial("Layout/_NavPublic")
+                                        }
+
+                                    </ul>
+
+                                </div>
+                            </nav>
+                            <!--Responsive Menu Start-->
+                            <div id="kode-responsive-navigation" class="dl-menuwrapper">
+                                <button class="dl-trigger">Open Menu</button>
+                                <ul class="dl-menu">
+                                    @if (isAdmin)
+                                    {
+                                        @Html.Partial("Layout/_NavAdmin")
+                                    }
+                                    else if (isMember)
+                                    {
+
+                                        @Html.Partial("Layout/_NavMember")
+
+                                    }
+                                    else
+                                    {
+                                        @Html.Partial("Layout/_NavPublic")
+                                    }
+                                </ul>
+                            </div>
+                            <!--Responsive Menu END-->
+                        </div>
+                        <!--navigation inner Wrap End-->
+                        <!--Search and Cart Wrap Start-->
+
+                        <div class="rgb-search-cart-wrap">
+
+                            @if (isAdmin)
+                            {
+                               
+                            }
+                            else if (isMember)
+                            {
+                              
+
+                            }
+                            else
+                            {
+                                <marquee behavior="scroll" direction="left">
+                                    <strong style="color:white;">Become a member and receive Exclusive V.I.P tips today.</strong>
+                                </marquee>
+                            }
+
+                        </div>
+
+                        <!--Search and Cart Wrap End-->
+
+                    </div>
+                    <!--Navigation Wrap End-->
+                </div>
+                <!--Inner Header Wrap End-->
+            </div>
+        </header>
+        <!--Header 2 Wrap End-->
+
+
+        <!--Main Content Start-->
+
+        <div class="rgb-content-wrap">
+
+            <main>
+                @RenderBody()
+            </main>
+
+        </div>
+        <!--Main Content End-->
+
+        @{
+            Html.RenderPartial("Layout/_Footer");
+        }
+
+    </div>
+
+
+    <div class="go-top"><i data-feather="arrow-up"></i></div>
+    @Html.Partial("Layout/_Scripts")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

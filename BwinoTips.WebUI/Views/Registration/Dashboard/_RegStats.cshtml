@@ -1,0 +1,34 @@
+﻿@model BwinoTips.WebUI.Models.Dashboard.MemberStatsModel
+
+            <ul class="ts-social-list">
+                <li class="ts-facebook">
+                    <a>
+                        <i class="fa fa-users"></i>
+                    </a>
+                    <label>@Model.TotalRequests</label>  
+                    <span>Total Members</span>                
+                </li>
+                <li class="ts-google-plus">
+                    <a>
+                        <i class="fa fa-address-book-o"></i>
+                    </a>
+                    <label>@Model.TotalNewMember</label>
+                    <span>Unsubscribed Members</span>
+                </li>
+                <li class="ts-twitter">
+                    <a>
+                        <i class="fa fa-thumbs-o-up"></i>
+                    </a>
+                    <label>@Model.TotalActive</label>
+                    <span>Active Subscriptions</span>
+                </li>
+                <li class="ts-pinterest">
+                    <a>
+                        <i class="fa fa-thumbs-o-down"></i>
+                    </a>
+                    <label>@Model.TotalExpired</label>
+                    <span>Expired Subscriptions</span>
+                </li>
+              
+              
+            </ul>

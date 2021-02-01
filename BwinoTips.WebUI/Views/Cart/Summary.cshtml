@@ -1,0 +1,38 @@
+﻿@model BwinoTips.Domain.Models.Cart
+
+@{
+    var url = Request.Url.PathAndQuery.Contains("Add") ? "games" : Request.Url.PathAndQuery;
+}
+
+
+
+@if (Model.Lines.Count() > 0)
+   {
+    
+    @Html.Bootstrap().ActionLinkButton(@Model.Lines.Count().ToString() + " game(s) , "+ @Model.computeTotal().ToString()+" odds", "Index", "Cart").Class("btn btn-success").RouteValues(new { returnUrl = url }).PrependIcon("fa fa-clipboard").HtmlAttributes(new { style = "color:white;" })
+
+}
+
+@*<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="fs-18 font-weight-bold mb-0">Ticket Items</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <a class="has-arrow material-ripple" style="color:red;font-size:30px;">
+            <i class="typcn typcn-clipboard mr-2"></i>
+           @if (Model.Lines.Count() > 0)
+            {
+            @Model.Lines.Count() <p>game(s)</p> <br />
+            @Model.computeTotal()
+            }
+        </a>
+        <div class="navbar-right">
+            @Html.Bootstrap().ActionLinkButton("View Ticket", "Index", "Cart").Class("btn btn-success").RouteValues(new { returnUrl = url }).PrependIcon("typcn typcn-clipboard mr-2").HtmlAttributes(new { style = "color:white;" })
+        </div>
+     </div>
+</div>*@
+

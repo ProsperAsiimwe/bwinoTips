@@ -1,0 +1,3 @@
+﻿@model DateTime?
+@Html.Bootstrap().TextBoxFor(m => m).Placeholder("Date format: yyyy-mm-dd").PrependIcon("fa fa-calendar").Class("datetimepicker1").Format("{0:yyyy-MM-dd HH:mm}").HtmlAttributes(new { autocomplete = "off" }).ShowValidationMessage(false)
+@Html.ValidationMessageFor(m => m)

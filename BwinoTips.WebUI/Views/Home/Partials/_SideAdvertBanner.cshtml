@@ -1,0 +1,17 @@
+﻿@model BwinoTips.WebUI.Models.Adverts.AdListViewModel
+
+
+    @if (Model.Adverts.Count() > 0)
+    {
+        foreach (var item in Model.Adverts)
+        {
+            <div class="box">
+                <img alt="..." src="@Url.Content(string.Format("~/Content/Adverts/{0}", item.FileName))" style="max-width:100%; text-align:center;">
+            </div>
+        }
+    }
+    else
+    {
+        <img class="card-img-top" alt="..." src="~/Content/coreAssets/dist/img/logo/logo.png">
+    }
+

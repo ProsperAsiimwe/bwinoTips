@@ -1,0 +1,20 @@
+﻿@model BwinoTips.Domain.Entities.ApplicationUser
+
+@{ 
+    string orgName =  Settings.COMPANY_NAME;
+    string orgTel = Settings.COMPANY_PHONE;
+  
+}
+
+<p style="text-align:right">@orgName</p>
+<p style="text-align:right">@orgTel</p>
+
+<h1>Dear @orgName Administrator, </h1>
+<h1 style="color:red; font-size:">Re: New user Notification</h1>
+<hr />
+<h2><strong style="color:green">Please consider this new user for a free trial account or stand by for their paid subscription.</strong></h2>
+
+<h2><strong>Member: @Model.FullName</strong></h2>
+
+<h2><strong>Phone Number: @Model.PhoneNumber</strong></h2>
+

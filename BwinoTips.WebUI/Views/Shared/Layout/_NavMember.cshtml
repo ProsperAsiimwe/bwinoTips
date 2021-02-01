@@ -1,0 +1,13 @@
+﻿@using BwinoTips.WebUI.Infrastructure.Helpers;
+
+@{
+    var active = ViewBag.Active;
+}
+
+<li class="@(active == "Account" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Dashboard ", "Index", "Account").PrependIcon("fa fa-home mr-2")
+</li>
+
+@*<li class="@(active == "Chat" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Chat ", "Index", "Chat").PrependIcon("fa fa-comments mr-2")
+</li>*@

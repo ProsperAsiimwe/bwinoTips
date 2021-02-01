@@ -1,0 +1,31 @@
+﻿@model BwinoTips.WebUI.Models.Dashboard.TipStatsModel   
+
+
+<div class="widgets ts-grid-item  widgets-populer-post">
+    <h3 class="widgets-title">
+        <span>Quick Stats</span>
+    </h3>
+    <ul class="category-list">
+        <li>
+            <a>
+                Pending Exclusive Tips
+                <span class="ts-orange-bg">@Model.ExclPending</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                Past Winning Tips
+                <span class="ts-green-bg">@Model.ExclCorrect</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                Past Failed Tips
+                <span style="background-color:red;">@Model.ExclWrong</span>
+            </a>
+        </li>
+       
+    
+    </ul>
+</div>
+

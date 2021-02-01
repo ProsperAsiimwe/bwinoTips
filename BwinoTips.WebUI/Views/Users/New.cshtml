@@ -1,0 +1,132 @@
+﻿@model BwinoTips.WebUI.Models.Users.ProfileViewModel
+@{
+
+
+    string companyName = Settings.COMPANY_NAME;
+
+    string action, cancel_url, buttonText, instr, instr2, buttonText2, glyph;
+    bool isAdmin = PageData["isAdmin"];
+    bool isMember = PageData["isMember"];
+    string roleName = PageData["roleName"];
+    string roleTitle = PageData["roleTitle"];
+
+    if (!string.IsNullOrEmpty(Model.UserId)) {
+        cancel_url = Url.Action("Show", new { id = Model.User.DisplayId, roleName = roleName });
+        action = "Update";
+        buttonText = "Update Profile";
+        buttonText2 = "Update Profile";
+        instr = "Modify the details and click Update to apply changes";
+        instr2 = "Modify the details and click Update to apply changes";
+        glyph = "glyphicon glyphicon-thumbs-up";
+        ViewBag.Title = "Update Admin";
+    }
+    else {
+        cancel_url = Url.Action("Index");
+        action = "Create";
+        buttonText = "Create " + roleTitle;
+        buttonText2 = "Register";
+        instr = "Complete the form below and click Create to create a new " + roleTitle;
+        instr2 = "Complete the form below and click Register to become a new " + roleTitle + " of " + companyName;
+        glyph = "glyphicon glyphicon-plus";
+        ViewBag.Title = "Create " + roleTitle;
+    }
+
+    // If user access, change the return url
+    if (!isAdmin) {
+        cancel_url = Url.Action("Index", "Account");
+    }
+}
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h2 class="fs-18 font-weight-bold mb-0">@ViewBag.Title</h2>
+                    <div class="inbox-toolbar btn-toolbar">
+                        <div class="btn-group">
+                            @Html.Bootstrap().ActionLinkButton("Back", "Index", "Users").Class("btn btn-danger").PrependIcon("fa fa-arrow-left").HtmlAttributes(new { style = "color:white;", title = "Homepage" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+             @using (var f = Html.Bootstrap().Begin(new Form(action, "Users").FormMethod(
+                                                        FormMethod.Post)))
+             {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.UserId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="col-md-4 pr-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">                                   
+                                    @f.FormGroup().DropDownListFor(m => m.TitleId, Model.Titles.Select(x => new SelectListItem { Value = x, Text = x })).OptionLabel("Select title").Class("form-control")
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(m => m.LastName).Class("form-control").Label().HtmlAttributes(new { required = "This field is required" })                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(p => p.FirstName).Placeholder().Class("form-control").Label().HtmlAttributes(new { required = "", type = "text" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 pr-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                   @f.FormGroup().TextBoxFor(p => p.Email).Placeholder().Class("form-control").Label().HtmlAttributes(new { required = "This field is required", type = "email" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(p => p.PhoneNumber).Placeholder().Class("form-control").Label().HtmlAttributes(new { id = "datetimepicker1", required = "" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(p => p.Password).Placeholder().Class("form-control").Label().HtmlAttributes(new { required = "", type = "text" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">                      
+                        <div class="col-md-4 pr-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(p => p.ConfirmPassword).Placeholder().Class("form-control").Label().HtmlAttributes(new { required = "", type = "text" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-fill btn-primary">@buttonText</button>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

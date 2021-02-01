@@ -1,0 +1,58 @@
+﻿@model BwinoTips.WebUI.Models.Users.SubscriptionsModel
+@{
+    ViewBag.Title = "Subscription Status";
+    string action, cancel_url, buttonText, instr, glyph;
+    string roleName = "members";
+    bool isAdmin = PageData["isAdmin"];
+
+    cancel_url = Url.Action("Show", new { DisplayId = Model.DisplayId });
+    action = "UpdateSubscription";
+    buttonText = "Update Status";
+    instr = "Modify the details and click Update to apply changes";
+    glyph = "fa fa-thumbs-up";
+    ViewBag.Title = "Update Status";
+}
+
+<div class="col-md-12 col-lg-12">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fs-17 font-weight-600 mb-0">@ViewBag.Title</h6>
+
+                    <p>@instr</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="skin-flat">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                       @using (var f = Html.Bootstrap().Begin(new Form(action, "Users").FormMethod(FormMethod.Post)))
+                       {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.DisplayId)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().DropDownListFromEnumFor(p => p.Plan).Class("form-control").Label().HtmlAttributes(new { required = "" })
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-success btn-block">@buttonText</button>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

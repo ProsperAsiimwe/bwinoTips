@@ -1,0 +1,46 @@
+﻿@model BwinoTips.Domain.Entities.FreeTip
+@{
+    ViewBag.Title = "Terminate Tip";
+}
+
+<!-- post wraper start-->
+<section class="body-color">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="contact-box ts-grid-box">
+                    <h3>@ViewBag.Title</h3>
+
+                    <h5 style="color:red;">By doing this you'll terminate this tip and delete all it's associated data.</h5>
+
+                <h4>
+                    @Model.TipName
+                </h4>
+
+                    <div class="text-right">
+                        <h4>@Html.Bootstrap().ActionLink("Back", "Index", "FreeTip").HtmlAttributes(new { title = "Homepage", @class = "" })</h4>
+                    </div>
+
+
+                    @using (Html.BeginForm("Destroy", "FreeTip", new { FreeTipId = Model.FreeTipId }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Bootstrap().SubmitButton().Text("Terminate Tip").Style(ButtonStyle.Danger).AppendIcon("fa fa-remove")
+                    }
+
+
+                </div><!-- grid box end -->
+            </div>
+            <!-- col end-->
+            <!-- col end-->
+
+
+        </div>
+        <!-- row end-->
+    </div>
+    <!-- container end-->
+</section>
+<!-- post wraper end-->
+
+

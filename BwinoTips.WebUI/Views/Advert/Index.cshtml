@@ -1,0 +1,86 @@
+﻿@model BwinoTips.WebUI.Models.Adverts.AdListViewModel
+
+@{
+    ViewBag.Title = "Adverts";
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-4">
+
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="fs-18 font-weight-bold mb-0">@ViewBag.Title</h2>
+
+                <div class="inbox-toolbar btn-toolbar">
+                    <div class="btn-group">
+                        @Html.Bootstrap().ActionLinkButton("Add New Advert", "New", "Advert").Class("btn btn-success").AppendIcon("fa fa-plus").HtmlAttributes(new { style = "color:white;" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class=table-responsive>
+                    <!--<table class="table table-sm table-nowrap card-table">-->
+                    <table class="table display table-bordered table-striped table-hover bg-white m-0 card-table">
+                        <thead>
+                            <tr>
+                                <th>Uploaded:</th>
+                                <th>Image:</th>
+                                <th>Actions:</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                         @if (Model.Adverts.Count() > 0)
+                         {
+                             foreach (var item in Model.Adverts)
+                             {
+
+                                    <tr>
+
+                                        <td>
+                                            <div>
+                                                <span class="badge badge-info">@item.UploadDate</span>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <img class="card-img-top" src="@(string.IsNullOrEmpty(item.FileName)? "~/Content/coreAssets/dist/img/logo/logo.png": @Url.Content(string.Format("~/Content/Adverts/{0}",item.FileName)))" alt="image" style="height:100px;max-width:100px;" />
+                                            </div>
+                                        </td>
+
+                                        <td>
+
+                                            <div class="inbox-toolbar btn-toolbar">
+                                                <div class="btn-group ml-1 d-none d-lg-flex">                                                  
+                                                    @Html.Bootstrap().ActionLinkButton("", "Delete").RouteValues(new { id = item.AdvertId }).Class("text-center btn btn-danger").AppendIcon("fa fa-trash").HtmlAttributes(new { style = "font-size:10px;" })
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                             }
+                         }
+
+                         else
+                         {
+                            <tr>
+                                <td colspan="6">There are no records matching your search criteria</td>
+                            </tr>
+                         }
+
+                        </tbody>
+                    </table>
+                </div>
+
+             
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

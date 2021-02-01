@@ -1,0 +1,56 @@
+﻿@model BwinoTips.WebUI.Models.Dashboard.DashboardModel
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Random random = new Random();
+
+}
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <h1>Welcome to @Settings.COMPANY_NAME</h1>
+                <p>Below is a summary of activity and records requiring action</p>
+            </div>
+            <div class="col-sm-3">
+                <p style="color:green">Cash at hand: <strong>@Model.Balance.ToString("n0") Ugx</strong></p>
+                <hr />
+                <p style="color:red"> To be dispensed: <strong>@Model.Pending.ToString("n0") Ugx</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="dashboard-statistics">
+    <div class="container">
+        @Html.Action("GetWorkStats", "Works")
+    </div>
+</div>
+<div class="section-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table table-activity">
+                        <caption>Latest Activity</caption>
+                        <tbody>
+                            @foreach (var item in Model.GetLatestActivity())
+                            {
+                                <tr>
+                                    <td>
+                                        <p>@Html.Raw(item.Description.Replace(Environment.NewLine, "<br />"))</p>
+                                    </td>
+                                    <td class="recorded">
+                                        <span class="date"><i class="fa fa-calendar-o"></i>@item.Recorded.ToString("dd/MM/yyyy HH:mm")</span>
+                                        <span class="user"><i class="fa fa-user"></i>@(item.RecordedBy != null ? item.RecordedBy.FullName : "System")</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6" id="panel-activity">
+                @Html.Action("ActivityAsLine", "Charts")
+            </div>
+        </div>
+    </div>
+</div>

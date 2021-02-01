@@ -1,0 +1,37 @@
+﻿
+@Scripts.Render("~/bundles/sitescripts")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+<script>
+        window.theme = "default";
+</script>
+
+<script>
+        (function() {
+            'use strict';
+
+            // Self Initialize DOM Factory Components
+            domFactory.handler.autoInit()
+
+            // Connect button(s) to drawer(s)
+            var sidebarToggle = Array.prototype.slice.call(document.querySelectorAll('[data-toggle="sidebar"]'))
+
+            sidebarToggle.forEach(function(toggle) {
+                toggle.addEventListener('click', function(e) {
+                    var selector = e.currentTarget.getAttribute('data-target') || '#default-drawer'
+                    var drawer = document.querySelector(selector)
+                    if (drawer) {
+                        drawer.mdkDrawer.toggle()
+                    }
+                })
+            })
+
+            //////////////////////////////////////////
+            // BREAK OUT OF ENVATO LIVE DEMO IFRAME //
+            //////////////////////////////////////////
+
+            window.top.location.hostname !== window.location.hostname && (window.top.location = window.location)
+
+        })();
+</script>

@@ -1,0 +1,68 @@
+﻿@model BwinoTips.WebUI.Models.Carts.CartIndexViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Ticket";
+}
+
+  <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12">
+
+          <div class="card mb-4">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                  <h2 class="fs-18 font-weight-bold mb-0">Ticket Items</h2>
+
+                  <div class="inbox-toolbar btn-toolbar">
+                      <div class="btn-group">
+                          @Html.Bootstrap().ActionLinkButton("Approve Ticket", "Checkout").Class("btn btn-success").AppendIcon("fa fa-smile-o").HtmlAttributes(new { style = "color:white;" })
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+
+          <div class="card-body">
+              <div class=table-responsive>
+                  <table class="table display table-bordered table-striped table-hover bg-white m-0 card-table">
+                      <thead>
+                          <tr>
+                              <th>Date</th>
+                              <th>Teams</th>
+                              <th>Tip</th>
+                              <th>Odd</th>  
+                              <th>Actions</th>                          
+                          </tr>
+                      </thead>
+                      <tbody id="myBody">
+                          @if (Model.Cart.Lines.Count() > 0)
+                          {
+                              foreach (var line in Model.Cart.Lines)
+                              {
+                                  @Html.Partial("Partials/_Item", line)
+                              }
+                          }
+                       
+                      </tbody>
+                      <tfoot>
+                          <tr> 
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td class="text-right" style="font-size:20px;">                               
+                                  <div id="cart-total">
+                                      <span class="badge badge-success">Total Odds: @Model.Cart.computeTotalValue()</span>
+                                  </div>
+                              </td>
+                        </tr>
+                      </tfoot>
+                </table>
+            </div>
+          </div>
+
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/admin/admin-product.min.js?v=4"></script>
+}

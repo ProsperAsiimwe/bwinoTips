@@ -1,0 +1,97 @@
+﻿@model BwinoTips.WebUI.Models.Users.ProfileViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string companyName = Settings.COMPANY_NAME;
+
+    string action, cancel_url, buttonText, instr, instr2, buttonText2, glyph;
+    string roleName = PageData["roleName"];
+    string roleTitle = PageData["roleTitle"];
+
+
+    cancel_url = Url.Action("Index");
+    action = "Create";
+    buttonText = "Create " + roleTitle;
+    buttonText2 = "Register";
+    instr = "Complete the form below to create an account with " + Settings.COMPANY_NAME;
+    glyph = "glyphicon glyphicon-plus";
+    ViewBag.Title = "Register Account";
+
+}
+
+
+<div class="row">
+    <div class="col-lg-12 col-xl-12">
+        <div class="row d-flex align-items-center justify-content-center text-center h-0vh">
+            <div class="col-lg-12 col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <div class="row justify-content-center">
+                            <div class="greet-user col-12 col-xl-12">
+                                <img src="~/Content/coreAssets/dist/img/logo/logo.png" alt="..." class="img-fluid  mb-2" style="height:120px;width:120px;">
+
+                                <div class="panel">
+                                    <div class="divider font-weight-bold text-uppercase text-dark d-table text-center my-3">Create an Account!</div>
+                                    @using (var f = Html.Bootstrap().Begin(new Form(action, "Registration").HtmlAttributes(new { @class = "register-form" }).FormMethod(FormMethod.Post)))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(m => m.UserId)
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="divider font-weight-bold text-uppercase text-danger d-table text-center my-3">Personal Details</div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().DropDownListFor(m => m.TitleId, Model.Titles.Select(x => new SelectListItem { Value = x, Text = x })).OptionLabel("Select title").HtmlAttributes(new { style = "height:40px;" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().TextBoxFor(m => m.FirstName).Placeholder().HtmlAttributes(new { required = "This field is required" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().TextBoxFor(m => m.LastName).Placeholder().HtmlAttributes(new { required = "This field is required" })
+                                        </div>
+
+                                        <div class="divider font-weight-bold text-uppercase text-danger d-table text-center my-3">Contact Details</div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().TextBoxFor(m => m.PhoneNumber).Placeholder().HtmlAttributes(new { required = "This field is required" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().TextBoxFor(m => m.Email).Placeholder().HtmlAttributes(new { required = "This field is required" })
+                                        </div>
+
+                                        <div class="divider font-weight-bold text-uppercase text-danger d-table text-center my-3">Security Details</div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().PasswordFor(m => m.Password).Placeholder().HtmlAttributes(new { required = "This field is required" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @f.FormGroup().PasswordFor(m => m.ConfirmPassword).Placeholder().HtmlAttributes(new { required = "This field is required" })
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-success btn-block">Sign Up</button>
+                                    }
+
+                                    <hr />
+                                    @Html.Bootstrap().ActionLink("Back to login", "Index", "Home").AppendIcon("fa fa-sign-in")
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+}

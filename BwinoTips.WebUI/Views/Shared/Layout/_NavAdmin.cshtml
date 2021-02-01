@@ -1,0 +1,49 @@
+﻿@using BwinoTips.WebUI.Infrastructure.Helpers;
+@{
+    var active = ViewBag.Active;
+}
+<li class="@(active == "Account" ? "mm-active" : "")">     
+    @Html.Bootstrap().ActionLink("Dashboard ", "Index", "Account").PrependIcon("fa fa-home mr-2") 
+</li>
+
+<li class="@(active == "ExclusiveTip" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Games", "Index", "ExclusiveTip").PrependIcon("fa fa-futbol-o mr-2")
+</li>
+
+@*<li class="@(active == "FreeTip" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Free Tips", "Index", "FreeTip").PrependIcon("typcn typcn-gift mr-2")
+</li>*@
+
+<li class="@(active == "Tickets" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Tickets", "Index", "Ticket").PrependIcon("fa fa-newspaper-o mr-2")
+</li>
+
+<li class="@(active == "League" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Leagues", "Index", "League").PrependIcon("fa fa-globe mr-2")
+</li>
+
+<li class="@(active == "Adverts" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Adverts", "Index", "Advert").PrependIcon("fa fa-newspaper-o mr-2")
+</li>
+
+
+
+<li>
+    <a class="has-arrow material-ripple" href="#">
+        <i class="fa fa-user mr-2"></i>
+        Users
+    </a>
+    <ul class="nav-second-level">
+        <li>
+            @Html.Bootstrap().ActionLink("Members", "Index", "Users").RouteValues(new { roleName = "members" })
+        </li>
+        <li>
+            @Html.Bootstrap().ActionLink("Admins", "Index", "Users").RouteValues(new { roleName = "admins" })
+        </li>      
+    </ul>
+</li>
+
+@*<li>
+     @Html.Bootstrap().ActionLink("Account ", "ChangePwd", "Account").AppendIcon("fa fa-lock")
+</li>*@
+   

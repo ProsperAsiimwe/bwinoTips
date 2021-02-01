@@ -1,0 +1,29 @@
+﻿@using BwinoTips.Domain.Models;
+@{
+    var cart = (Cart)Session["Cart"] == null ? null : (Cart)Session["Cart"];
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="fs-18 font-weight-bold mb-0">Ticket Items</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <a class="has-arrow material-ripple" style="color:red;font-size:30px;">
+            <i class="typcn typcn-clipboard mr-2"></i>
+            @if (cart != null && cart.Lines.Count() > 0)
+            {
+                @cart.Lines.Sum(x => x.Quantity)
+                <br />
+               @cart.computeTotalValue();
+            }
+        </a>
+        <a href="#!" class="btn btn-success">
+            View Ticket
+        </a>
+    </div>
+</div>
+

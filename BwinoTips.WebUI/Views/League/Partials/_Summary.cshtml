@@ -1,0 +1,30 @@
+﻿@model BwinoTips.Domain.Entities.League
+
+<div class="col-md-12">
+
+    <div class="rgb-contact-wrap margin-bottom30">
+        <!--<div class="col-md-4">
+            --Map Start
+            <div id="map-canvas"></div>
+            <!--Map End
+        </div>-->
+        <div class="col-md-12">
+            <!--Contact Contant Start-->
+            <div class="rgb-contact-contant rgb-white-style">
+                <h5>League Details</h5>
+               
+                <ul class="contact-meta-list">
+                    <li><i class="lnr lnr-home">@Html.DisplayNameFor(m => m.Name)</i><em>@Model.Name</em></li>
+                    <li><i class="lnr lnr-flag">@Html.DisplayNameFor(m => m.Country)</i><em>@Model.Country</em></li>
+                    <li><i class="lnr lnr-checkmark-circle">@Html.DisplayNameFor(m => m.Added)</i><em>@Model.Added</em></li>                   
+                </ul>
+
+
+            </div>
+            <!--Contact Contant End-->
+        </div>
+    </div>
+
+</div>
+
+  

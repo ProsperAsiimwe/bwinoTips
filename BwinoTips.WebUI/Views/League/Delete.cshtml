@@ -1,0 +1,40 @@
+﻿@model BwinoTips.Domain.Entities.League
+@{
+    ViewBag.Title = "Terminate League";
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h2 class="fs-18 font-weight-bold mb-0">@ViewBag.Title</h2>
+                    <div class="inbox-toolbar btn-toolbar">
+                        <div class="btn-group">
+                            @Html.Bootstrap().ActionLinkButton("Back", "Index", "League").Class("btn btn-danger").PrependIcon("fa fa-arrow-left").HtmlAttributes(new { style = "color:white;", title = "Homepage" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+               @using (Html.BeginForm("Destroy", "League", new { LeagueId = Model.LeagueId }))
+               {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                
+                    <div class="card-footer">
+                        @Html.Bootstrap().SubmitButton().Text("Terminate League").Style(ButtonStyle.Danger).AppendIcon("fa fa-remove")
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,176 @@
+﻿@model BwinoTips.WebUI.Models.Free.FreeListViewModel
+@{
+    ViewBag.Title = "Free Tips";
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+}
+
+	<!-- post wraper start-->
+<section class="body-color">
+    <div class="container">
+        <div class="row">
+          
+                <div class="col-lg-12">
+                    <div class="contact-box ts-grid-box">
+                        <h3>@ViewBag.Title</h3>
+
+                        @if (isAdmin)
+                        {
+                            <div class="text-right">
+                                @Html.Bootstrap().ActionLinkButton("Add New Tip", "New").Class("btn btn-primary solid blank").AppendIcon("fa fa-plus").HtmlAttributes(new { style = "background-color:green;color:white;" })
+                            </div>
+                               
+                                }
+
+                                <br /><hr />
+
+                                @Html.Partial("Partials/_SearchFreeTips", Model.SearchModel)
+
+                                <div class="row" style="overflow-x:scroll">
+                                    <table id="DonDada">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Date / Time:</th>
+                                                <th>Teams:</th>
+                                                <th>Tip:</th>
+                                                <th>Result:</th>
+                                                <th>League:</th>
+                                                <th>Odd:</th>
+                                                <th>Status:</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @if (Model.FreeTips.Count() > 0)
+                                            {
+                                                foreach (var item in Model.FreeTips)
+                                                {
+                                                    var css = item.GetStatusCssClass();
+                                                    ButtonStyle button_css = BwinoTips.WebUI.Infrastructure.Helpers.FreeTipHelper.GetButtonStyle(css);
+
+                                                    <tr class="@css">
+                                                        <td>
+                                                            <div style="color:red">
+                                                                <p>@item.Date</p>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <!--Table Team opponanet Start-->
+                                                            <div class="tb-opponanet-contant">
+                                                                <!--Team 1 Start-->
+                                                                <div class="tb-team-1">
+
+                                                                    <div style="color:red">
+                                                                        @item.HomeTeam
+                                                                    </div>
+
+                                                                </div>
+                                                                <!--Team 1 End-->
+                                                                <div>VS</div>
+                                                                <!--Team 2 Start-->
+                                                                <div class="tb-team-2">
+
+                                                                    <div style="color:red">
+                                                                        @item.AwayTeam
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <!--Team 1 End-->
+                                                            </div>
+                                                            <!--Table Team opponanet End-->
+                                                        </td>
+
+                                                        <td>
+                                                            <div style="color:green">
+                                                                @item.Tip
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <div style="color:blue">
+                                                                @(string.IsNullOrEmpty(item.Result) ? "Not Played Yet" : item.Result)
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td>
+                                                            @item.League.Name
+                                                        </td>
+
+                                                        <td>
+                                                            @item.Odd
+                                                        </td>
+
+                                                        <td>
+
+                                                            <div style="color:indigo">
+                                                                @Html.Bootstrap().ActionLinkButton(item.Status.ToString(), "TipStatus").RouteValues(new { FreeTipId = item.FreeTipId }).Style(button_css).AppendIcon("fa fa-edit")
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td colspan="7">
+
+                                                            @if (isAdmin)
+                                                            {
+                                                                <div class="text-right">
+                                                                    @Html.Bootstrap().ActionLinkButton("Edit", "Edit").RouteValues(new { FreeTipId = item.FreeTipId }).Style(ButtonStyle.Success).Class("btn btn-primary solid blank").HtmlAttributes(new { style = "background-color:green;" })
+                                                                    @Html.Bootstrap().ActionLinkButton("Delete", "Delete").RouteValues(new { FreeTipId = item.FreeTipId }).Style(ButtonStyle.Danger).Class("btn btn-primary solid blank").HtmlAttributes(new { style = "background-color:red;" })
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="7">There are no records matching your search criteria</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+
+                        <div class="clearfix">
+                            <div class="pull-right">
+                                <div class="pagination-panel">
+                                    <div class="pagination-labels">@Model.PagingInfo.ItemsFrom to @Model.PagingInfo.ItemsTo of @Model.PagingInfo.TotalItems Tips</div>
+                                    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+                                </div>
+                            </div>
+                        </div>
+
+                            </div><!-- grid box end -->
+
+
+                </div>
+            <!-- col end-->
+
+
+            <!-- col end-->
+                     
+
+        </div>
+        <!-- row end-->
+    </div>
+    <!-- container end-->
+</section>
+<!-- post wraper end-->
+
+

@@ -1,0 +1,180 @@
+﻿@*@model BwinoTips.WebUI.Models.Free.FreeListViewModel*@
+@{
+    ViewBag.Title = Settings.COMPANY_NAME;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string companyName = Settings.COMPANY_NAME;
+    string strCurrency = "Ugx.";
+}
+
+
+<div class="row">   
+    <div class="col-lg-12 col-xl-6">
+        <div class="row">
+
+            <div class="col-md-12 col-lg-12">
+                <!--Revenue today indicator-->
+                <div class="p-2 bg-white rounded p-3 mb-3 shadow-sm">
+                    <div class="header-pretitle text-muted fs-12 font-weight-bold text-uppercase mb-2">
+                        We accept deposits from:
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            <img width="50" height="50" src="~/Content/coreAssets/dist/img/credit/mtn.png"/>
+                            <div class="text-monospace">0785951227</div>
+                        </div>
+                        <div class="col">
+                            <img width="50" height="50" src="~/Content/coreAssets/dist/img/credit/airtel.png" />
+                            <div class="text-monospace">0704229146</div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+       </div>
+
+        <div class="row">
+
+            <div class="col-md-12 col-lg-6">
+
+                <div class="d-flex position-relative overflow-hidden flex-column p-3 mb-3 bg-white shadow-sm rounded">
+                    <div class="header-pretitle text-muted fs-11 font-weight-bold text-uppercase mb-2">Our paid subscriptions</div>
+                    <i class="fas fa fa-smile opacity-25 fa-5x text-warning decorative-icon"></i>
+
+                    <div class="text-muted">
+                        <strong> WEEKLY SUBSCRIPTIONS</strong>
+                        <span class="text-success text-size-1 text-monospace">
+                            20,000 Ugx
+                        </span>
+                    </div>
+
+                    <div class="text-muted">
+                        <strong>MONTLY SUBSCRIPTIONS</strong>
+                        <span class="text-success text-size-1 text-monospace">
+                            50,000 Ugx
+                        </span>
+                    </div>
+
+                    <div class="text-muted">
+                        <strong>YEARLY SUBSCRIPTIONS</strong>
+                        <span class="text-success text-size-1 text-monospace">
+                            150,000 Ugx
+                        </span>
+                    </div>
+
+                </div>   
+                      
+            </div>
+
+            <div class="col-md-12 col-lg-6">
+
+                <div class="p-2 bg-white rounded p-3 mb-3 shadow-sm">
+                    <div class="header-pretitle text-muted fs-12 font-weight-bold text-uppercase mb-2">
+                        Online Betting Platforms
+                    </div>
+
+                    <div class="text-muted">
+                        <i class="fas fa fa-caret-up text-success"></i>
+                        <a href="https://www.betpawa.ug/" target="_blank">Betpawa Uganda</a>
+                    </div>
+
+                    <div class="text-muted">
+                        <i class="fas fa fa-caret-up text-success"></i>
+                        <a href="https://www.betway.ug/" target="_blank">Betway Uganda</a>
+                    </div>
+
+                    <div class="text-muted">
+                        <i class="fas fa fa-caret-up text-success"></i>
+                        <a href="https://www.bet365.com/#/HO/" target="_blank">Bet365</a>
+                    </div>
+
+                    <div class="text-muted">
+                        <i class="fas fa fa-caret-down text-danger"></i>
+                        <a href="https://1xbet.ug/" target="_blank">1xBet</a>
+                    </div>
+
+
+                    <div class="text-muted">
+                        <i class="fas fa fa-caret-up text-success"></i>
+                        <a href="https://www.quickbetsug.com/en-ug/" target="_blank">Quickbets UG</a>
+                    </div>
+
+                    <div class="text-muted">
+                        <i class="fas fa fa-caret-down text-danger"></i>
+                        <a href="https://www.beton.co.ug/sportsbet/main" target="_blank">Beton</a>
+                    </div>
+
+                </div>
+
+                </div>
+
+            </div>
+
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                @Html.Action("GetFreeTickets", "Home")
+            </div>
+
+            <div class="col-md-12 col-lg-6">
+
+                <div class="card mb-4" id="slideshow">
+                    @*<img src="~/Content/BlogImages/betpawa.jpg" alt="..." class="card-img-top">*@
+                    @Html.Action("GetAds", "Home")
+                </div>
+             
+            </div>
+
+            </div>
+
+
+            @*</div>*@
+        </div>
+
+
+    <div class="col-lg-12 col-xl-6">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <div class="row justify-content-center">
+                    <div class="greet-user col-12 col-xl-10">
+                        <img src="~/Content/coreAssets/dist/img/logo/logo.png" alt="..." class="img-fluid  mb-2" style="height:120px;width:120px;">
+                        
+                         @Html.Partial("Partials/_Login")
+                                               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+@section Scripts {
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
+
+    @*ADVERT SLIDE SHOW*@
+    <script>
+        $("#slideshow > div:gt(0)").hide();
+
+        setInterval(function () {
+            $('#slideshow > div:first')
+            .fadeOut(100, function () {
+                $(this).next().fadeIn(1000).end().appendTo('#slideshow');
+            });
+        }, 4000);
+
+    //setInterval(function () {
+    //    $('#slideshow > div:first')
+    //        .fadeOut(1000)
+    //        .next()
+    //        .fadeIn(1000)
+    //        .end()
+    //        .appendTo('#slideshow');
+    //}, 4000);
+    </script>
+    }
+

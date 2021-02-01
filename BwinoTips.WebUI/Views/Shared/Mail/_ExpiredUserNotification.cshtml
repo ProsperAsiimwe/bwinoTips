@@ -1,0 +1,21 @@
+﻿@model BwinoTips.Domain.Entities.ApplicationUser
+
+@{
+    string orgName = Settings.COMPANY_NAME;
+    string orgTel = Settings.COMPANY_PHONE;
+    string orgEmail = string.Format("{0}{1}", Settings.COMPANY_URL);
+}
+
+<p style="text-align:right">@orgName</p>
+<p style="text-align:right">@orgTel</p>
+<p style="text-align:right">@orgEmail</p>
+
+<p>Dear @orgName Administrator, </p>
+<p>Re: Expired user Notification</p>
+<hr />
+<p><strong style="color:red">Please consider deactivating this user whose account has just expired.</strong></p>
+
+<p><strong>Member: @Model.FullName</strong></p>
+
+<p><strong>Description: @Model.PhoneNumber</strong></p>
+

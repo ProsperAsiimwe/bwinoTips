@@ -1,0 +1,203 @@
+﻿@model BwinoTips.WebUI.Models.Exclusive.ExclusiveListViewModel
+
+
+
+
+
+<div class="carousel">
+    <ul class="ct clearfix">
+
+        @*<li>
+            <div class="card">
+                <div class="container" style="padding: 2px 16px;text-align:center;color:white;">
+                    <h4><b>English Premier League</b></h4>
+                    <hr />
+                    <h5><b>Manchester United FC</b></h5>
+                    <h5><b>VS</b></h5>
+                    <h5><b>Chelsea FC</b></h5>
+                    <hr />
+                    <h5><b>Result: 4:0 </b></h5>
+                    <hr />
+                    <h5><b>Prediction: 1X </b></h5>
+                </div>
+            </div>
+        </li>*@
+
+
+
+        @if (Model.ExclusiveTips.Count() > 0)
+        {
+            foreach (var item in Model.ExclusiveTips)
+            {
+
+                if (item.Result != null && item.Status.ToString() == "Correct")
+                {
+
+                    <li>
+                        <div class="card">
+                            <div class="container" style="padding: 2px 16px;text-align:center;color:white;">
+                                @*<h4><b>@item.League</b></h4>
+                                <hr />*@
+                                <br />
+                                <h5><b>@item.HomeTeam </b></h5>
+                                <h5><b>VS</b></h5>
+                                <h5><b>@item.AwayTeam </b></h5>
+                                <hr />
+                                <h5><b>Result: @item.Result </b></h5>
+                                <hr />
+                                <h5><b>Prediction: @item.Tip </b></h5>
+                                <hr />
+                                <h5><b>Odd: @item.Odd </b></h5>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            }
+        }
+
+
+    </ul>
+    
+</div>
+
+@*<table id="DonDada">
+    <tbody>
+      @if (Model.ExclusiveTips.Count() > 0)
+      {
+          foreach (var item in Model.ExclusiveTips)
+          {
+
+              if (item.Result != null && item.Status.ToString() == "Correct")
+              {
+
+                <tr>
+                    <td><i class="fa fa-futbol-o"></i> @item.League</td>
+                    <td><i class="fa fa-home"></i> @item.HomeTeam</td>
+                    <td>VS</td>
+                    <td><i class="fa fa-bus"></i> @item.AwayTeam</td>
+                    <td> Result:@item.Result</td>
+                    <td> Rediction: @item.Tip</td>
+                </tr>
+              }
+          }
+      }
+      else
+      {
+            <tr>
+                <td colspan="8">There are no results at the moment!</td>
+            </tr>
+        }
+    </tbody>
+
+</table>*@
+   
+
+    @*<div class="widgets widgets-item">
+
+            <ul class="ts-block-social-list">
+                    @if (Model.ExclusiveTips.Count() > 0)
+                    {
+                        foreach (var item in Model.ExclusiveTips)
+                        {
+
+                            if (item.Result != null && item.Status.ToString() == "Correct")
+                            {
+
+                                <li style="background-color:green;">
+                                    <a href="#">
+
+                                        <i class="fa fa-home"></i>
+                                        <b>@item.HomeTeam </b>
+
+                                        <i class="fa fa-bus"></i>
+                                        <b>@item.AwayTeam </b>
+
+                                        <i class="fa fa-futbol-o"></i>
+                                        <b>@item.Result </b>
+
+                                        <span>Prediction : @item.Tip</span>
+                                    </a>
+
+                                </li>
+
+                            }
+                        }
+                    }
+
+            </ul>
+        </div>*@
+
+
+
+    @*<div class="rgb-content-wrap">
+
+            <!--Fixture Slider Wrap Start-->
+            <div class="rgb-fixtures-slider-wrap">
+
+                <!--Fixture Slider Start-->
+                <div class="fixtures-slider">
+
+
+                    @if (Model.ExclusiveTips.Count() > 0)
+                    {
+                        foreach (var item in Model.ExclusiveTips)
+                        {
+
+                            if (item.Result != null && item.Status.ToString() == "Correct")
+                            {
+
+                                <div>
+                                    <!--Fixture Contant Start-->
+                                    <div class="rgb-fixtures-contant border-top">
+
+                                        <h5 class="rgb-fixtures-date" style="color:green;">
+                                            Tip :  <strong style="color:green;">@item.Tip</strong>  <i class="fa fa-thumbs-o-up"></i>
+                                        </h5>
+
+                                        <div class="text" style="text-align:center;background-color:black;word-wrap: break-word;">
+                                            <!--Team 1 Start-->
+                                            <div class="rgb-team-1 pull-left">
+                                                <div class="team-meta-logo rgb-shadow">
+                                                    <img src="~/Content/coreAssets/images/Teams/home.png" alt="" >
+                                                    <br />
+                                                 <strong style="color:white;word-wrap: break-word;font-size:10px;">@item.HomeTeam</strong>
+                                                </div>
+                                            </div>
+                                            <!--Team 1 End-->
+                                            <h5 class="rgb-opponanet" style="color:white;font-size:10px;">VS</h5>
+                                            <!--Team 2 Start-->
+                                            <div class="rgb-team-1 pull-right">
+                                                <div class="team-meta-logo rgb-shadow">
+                                                    <img src="~/Content/coreAssets/images/Teams/away.png" alt="" >
+                                                    <br />
+                                                  <strong style="color:white;word-wrap: break-word;font-size:10px;">@item.AwayTeam</strong>
+                                                </div>
+                                            </div>
+                                            <!--Team 1 End-->
+                                        </div>
+                                        <h5 class="rgb-fixtures-date" style="color:green;">
+                                           Result : <strong style="color:green;">@item.Result</strong>
+                                        </h5>
+                                    </div>
+                                    <!--Fixture Contant End-->
+                                </div>
+
+
+                            }
+
+
+                        }
+                    }
+
+                    <div>
+
+                    </div>
+
+                </div>
+                <!--Fixture Slider Start-->
+            </div>
+            <!--Fixture Slider Wrap End-->
+
+
+        </div>*@

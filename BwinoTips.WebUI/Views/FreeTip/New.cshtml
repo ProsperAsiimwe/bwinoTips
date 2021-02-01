@@ -1,0 +1,125 @@
+﻿@model BwinoTips.WebUI.Models.Free.FreeViewModel
+
+@{
+    string action, cancel_url, buttonText, instr, glyph;
+    bool isAdmin = PageData["isAdmin"];
+
+    if (Model.FreeTipId > 0)
+    {
+        cancel_url = Url.Action("Show", new { FreeTipId = Model.FreeTipId });
+        action = "Update";
+        buttonText = "Update Tip";
+        instr = "Modify the details and click Update to apply changes";
+        glyph = "fa fa-thumbs-up";
+        ViewBag.Title = "Update Free Tip";
+    }
+    else
+    {
+        cancel_url = Url.Action("Index");
+        action = "Create";
+        buttonText = "Create Tip";
+        instr = "Complete the form below and click Create to add a new Tip";
+        glyph = "fa fa-plus";
+        ViewBag.Title = "New Free Tip";
+    }
+}
+
+	<!-- post wraper start-->
+<section class="body-color">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="contact-box ts-grid-box">
+                    <h3>@ViewBag.Title</h3>
+
+                    <div class="text-right">
+                        <h4>@Html.Bootstrap().ActionLink("Back", "Index", "FreeTip").HtmlAttributes(new { title = "Homepage", @class = "" })</h4>
+                    </div>
+                      
+
+                        @using (var f = Html.Bootstrap().Begin(new Form(action, "FreeTip").FormMethod(FormMethod.Post)))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.FreeTipId)
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @f.FormGroup().TextBoxFor(p => p.HomeTeam).Placeholder().Class("default-input").Label().HtmlAttributes(new { required = "" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    @f.FormGroup().TextBoxFor(p => p.AwayTeam).Placeholder().Class("default-input").Label().HtmlAttributes(new { required = "" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @f.FormGroup().TextBoxFor(p => p.Tip).Placeholder().Class("default-input").Label().HtmlAttributes(new { required = "" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    @f.FormGroup().TextBoxFor(p => p.Result).Placeholder().Class("default-input").Label()
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @f.FormGroup().DropDownListFor(p => p.LeagueId, Model.Leagues).OptionLabel("Select League").Prepend(Html.Bootstrap().ActionLink("Create New League", "New", "League")).HtmlAttributes(new { style = "height:40px;", required = "" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    @f.FormGroup().TextBoxFor(p => p.Date).HtmlAttributes(new { id = "datetimepicker1", required = "" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @f.FormGroup().TextBoxFor(p => p.Odd).Placeholder().Class("default-input").Label().HtmlAttributes(new { required = "" })
+                                </div>
+
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+
+                            <div class="text-right">
+                                <button class="btn btn-primary solid blank" type="submit">@buttonText</button>
+                            </div>
+
+                        }
+
+
+                    </div><!-- grid box end -->
+            </div>
+            <!-- col end-->
+            <!-- col end-->
+
+
+        </div>
+        <!-- row end-->
+    </div>
+    <!-- container end-->
+</section>
+<!-- post wraper end-->
+
+
+@section Scripts{
+
+
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js"></script>
+
+<script>
+        $("#datetimepicker1").datetimepicker();
+</script>
+  
+}
+

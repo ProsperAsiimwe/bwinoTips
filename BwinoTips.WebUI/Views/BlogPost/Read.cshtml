@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "My Posts " + Settings.COMPANY_NAME;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string companyName = Settings.COMPANY_NAME;
+}
+
+@Html.Partial("Partials/_ReadContent")
+
+@section Scripts {
+}

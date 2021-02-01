@@ -1,0 +1,13 @@
+﻿@model BwinoTips.Domain.Entities.FreeTip
+
+
+                <h5>League Details</h5>
+               
+                <ul class="contact-meta-list">
+                    <li><i class="fa fa-home">@Html.DisplayNameFor(m => m.HomeTeam): </i><em>@Model.HomeTeam</em></li>
+                    <li><i class="fa fa-handshake-o">@Html.DisplayNameFor(m => m.AwayTeam): </i><em>@Model.AwayTeam</em></li>
+                    <li><i class="lnr lnr-checkmark-circle">@Html.DisplayNameFor(m => m.Tip): </i><em>@Model.Tip</em></li>  
+                    <li><i class="fa fa-futbol-o">@Html.DisplayNameFor(m => m.League): </i><em>@Model.League.Name</em></li>
+                    <li><i class="lnr lnr-flag">@Html.DisplayNameFor(m => m.Status): </i><em>@Model.Status</em></li>
+                    <li><i class="fa fa-calendar-o">@Html.DisplayNameFor(m => m.Date): </i><em>@Model.Date</em></li>                      
+                </ul>

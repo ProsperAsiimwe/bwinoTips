@@ -1,0 +1,93 @@
+﻿@{
+    string companyName = Settings.COMPANY_NAME;
+    string subNavLabel = ViewBag.SubNavLabel ?? "Actions";
+    bool isAuthenticated = (User.Identity.IsAuthenticated);
+    bool isAdmin = (isAuthenticated) && (PageData["isAdmin"]);
+    string roleName = PageData["roleName"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - @Settings.COMPANY_NAME</title>
+    @Html.Partial("Layout/_Head")
+    @RenderSection("Header", required: false)
+</head>
+<body>
+
+    <!-- Start Preloader Area -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+    <!-- End Preloader Area -->
+    <!-- Start Navbar Area -->
+    <header id="header">
+        <div class="startp-mobile-nav">
+            <div class="logo">
+                <a href="#"><img src="~/Content/assets/img/soft_logo.png" alt="logo" style="max-width: 150px; height: 55px;"></a>
+            </div>
+        </div>
+
+        <div class="startp-nav">
+            <div class="container">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" href="#"><img src="~/Content/assets/img/soft_logo.png" alt="logo" style="max-width: 150px; height: 55px;"></a>
+
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav nav ml-auto">
+                            @{
+                                Html.RenderPartial("Layout/_NavAdmin");
+                            }
+                        </ul>
+                    </div>
+
+                    @*<div class="others-option">
+                        @Html.Bootstrap().ActionLinkButton("Support", "Support").Class("btn btn-light")
+                        @Html.Bootstrap().ActionLinkButton("Request Quote", "Quotation").Class("btn btn-primary")
+                    </div>*@
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- End Navbar Area -->
+
+    <main>
+        @if (TempData["success"] != null || TempData["error"] != null)
+            {
+            <div class="container">
+                @if (TempData["success"] != null)
+                {
+                    <div id="alert_main" class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.Raw(TempData["success"])
+                    </div>
+                }
+                else if (TempData["error"] != null)
+                {
+                    <div id="alert_main" class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.Raw(TempData["error"])
+                    </div>
+                }
+            </div>
+        }
+
+        @RenderBody()
+
+        @using (var modal = Html.Bootstrap().Begin(new Modal().Id("action-modal").Closeable()))
+            {
+            @modal.Header("New")
+
+            <div id="action-modal-content" class="modal-body"></div>
+        }
+    </main>
+
+    @{
+        Html.RenderPartial("Layout/_FooterAdmin");
+    }
+
+    <div class="go-top"><i data-feather="arrow-up"></i></div>
+    @Html.Partial("Layout/_Scripts")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

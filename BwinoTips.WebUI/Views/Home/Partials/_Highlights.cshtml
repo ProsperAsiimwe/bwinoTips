@@ -1,0 +1,36 @@
+﻿@model BwinoTips.WebUI.Models.Highlights.HighlightListViewModel
+
+@if (Model.Highlights.Count() > 0)
+{
+    foreach (var item in Model.Highlights)
+    {
+        <div class="col-lg-4" style="padding:5px;">
+            <div class="ts-overlay-style">
+                <!-- start item-->
+                <div class="item">
+                    <div class="ts-post-thumb">
+
+                        <a>
+                            <img class="img-fluid" src="@Url.Content(string.Format("~/Content/HighlightGallery/{0}", item.FileName))" alt="" style="width:850px;height:200px;">
+                        </a>
+                        <a href="@item.Url" class="ts-video-icon">
+                            <i class="fa fa-play-circle-o "></i>
+                        </a>
+                    </div>
+                    <br />
+                    <div class="overlay-post-content">
+                        <div class="post-content">
+                            <a class="post-cat ts-orange-bg" style="color:white;">@item.Competition</a>
+                            <h3 class="post-title">
+                                <a style="background-color:green; color:white;">@item.Title</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- end item-->
+            </div>
+            <!-- ts overlay style end-->
+        </div>
+    }
+}
+

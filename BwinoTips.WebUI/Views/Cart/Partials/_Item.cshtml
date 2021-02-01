@@ -1,0 +1,55 @@
+﻿@model BwinoTips.Domain.Models.CartLine
+@{
+
+}
+<tr data-exclusivetipid=@Model.ExclusiveTip.ExclusiveTipId>
+    <td>   
+        <div>
+            <span class="bg-violet badge avatar-text">@Model.ExclusiveTip.DateandTime</span>
+        </div>      
+    </td>
+
+    <td>
+        <div>
+            <span class="badge badge-info">@Model.ExclusiveTip.Teams</span>
+        </div>     
+    </td>
+
+    @*<td>
+        <div>
+            <span class="badge badge-success">@Model.ExclusiveTip.Competition</span>
+        </div>
+    </td>*@
+
+    <td>
+        <div>
+            <span class="badge badge-success">@Model.ExclusiveTip.Tip</span>
+        </div>
+    </td>
+
+    <td>
+        <div>
+            <span class="bg-yellow badge avatar-text">@Model.ExclusiveTip.Odd</span>
+        </div>
+    </td>
+
+    <td>
+        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+        {
+            @Html.Hidden("ExclusiveTipId", Model.ExclusiveTip.ExclusiveTipId)
+            @Html.Bootstrap().SubmitButton().Text("").HtmlAttributes(new { style = "height:40px !important;" }).ButtonBlock().AppendIcon("fa fa-remove").Style(ButtonStyle.Danger)
+        }
+    </td>
+
+    @*<td class="col-sm-1">@Html.Bootstrap().TextBoxFor(p => p.Discount).HtmlAttributes(new { type = "number", style = "height:40px !important;width:80px;" }).Data(new { ProductId = Model.Product.ProductId }).Class("cart-disc")</td>
+    <td class="col-sm-1">@Html.Bootstrap().TextBoxFor(p => p.Deduction).HtmlAttributes(new { type = "number", style = "height:40px !important;width:120px;" }).Data(new { ProductId = Model.Product.ProductId }).Class("cart-deduct")</td>
+    <td id="@string.Format("price-{0}", Model.Product.ProductId)">@InputHelper.ParseMoney(Model.Product.SellingPx)</td>
+    <td id="@string.Format("total-{0}", Model.Product.ProductId)">@InputHelper.ParseMoney(Model.Cost)</td>
+    <td class="col-sm-1">
+        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+        {
+            @Html.Hidden("ProductId", Model.Product.ProductId)
+            @Html.Bootstrap().SubmitButton().Text("").HtmlAttributes(new { style = "height:40px !important;" }).ButtonBlock().AppendIcon("fa fa-remove").Style(ButtonStyle.Danger)
+        }
+    </td>*@
+</tr>

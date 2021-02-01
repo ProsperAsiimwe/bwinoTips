@@ -1,0 +1,31 @@
+﻿@using BwinoTips.WebUI.Models.Account
+@model LoginViewModel
+@{
+    ViewBag.Title = "LOG IN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+
+<div class="row">
+    <div class="col-lg-12 col-xl-12">
+        <div class="row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <div class="row justify-content-center">
+                            <div class="greet-user col-12 col-xl-10">
+                                <img src="~/Content/coreAssets/dist/img/logo/logo.png" alt="..." class="img-fluid  mb-2" style="height:120px;width:120px;">
+
+                                @Html.Partial("Partials/_Login")
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+           

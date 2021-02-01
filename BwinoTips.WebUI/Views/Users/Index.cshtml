@@ -1,0 +1,205 @@
+﻿@model BwinoTips.WebUI.Models.Users.UserListViewModel
+@{
+    ViewBag.Title = PageData["pageTitle"];
+    string roleName = PageData["roleName"];
+    string roleTitle = PageData["roleTitle"];
+    //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string companyName = Settings.COMPANY_NAME;
+}
+
+<div class="row">
+
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="fs-18 font-weight-bold mb-0">@ViewBag.Title</h2>
+
+                <div class="inbox-toolbar btn-toolbar">
+                    <div class="btn-group">
+                        @Html.Bootstrap().ActionLinkButton("New " + roleTitle, "New").Class("btn btn-success").RouteValues(new { roleName = roleName }).AppendIcon("fa fa-plus").HtmlAttributes(new { style = "color:white;" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class=table-responsive>
+                    <!--<table class="table table-sm table-nowrap card-table">-->
+                    <table class="table display table-bordered table-striped table-hover bg-white m-0 card-table">
+
+                        @if (roleName.Equals("members"))
+                        {
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Subscription Date</th>
+                                    <th>Is Account Active?</th>
+                                    <th>Subscription Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Users.Count() > 0)
+                                {
+                                    foreach (var item in Model.Users)
+                                    {
+                                        var css = item.GetStatusCssClass();
+                                        ButtonStyle button_css = BwinoTips.WebUI.Infrastructure.Helpers.UserHelper.GetButtonStyle(css);
+
+                                        <tr class="@css">
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="font-size:15px;">
+                                                        @Html.ActionLink(String.Format("{1}, {0}", item.FirstName, item.LastName), "Show", "Users", routeValues: new { roleName = roleName, @id = item.DisplayId }, htmlAttributes: null)
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="font-size:15px;">@item.PhoneNumber</span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="text-transform:lowercase;font-size:15px;">@Html.EmailLink(item.Email)</span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="font-size:15px;">                                                       
+                                                        @if (item.SubscribeDate.HasValue)
+                                                        {
+                                                            @item.SubscribeDate.Value.ToShortDateString()
+                                                        }
+                                                        else
+                                                        {
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="font-size:15px;">@InputHelper.ParseBool(item.EmailConfirmed)</span>
+                                                </div>
+                                            </td>
+
+                                            <td id="outer" style="font-size:15px;">
+                                                @Html.Bootstrap().ActionLinkButton("", "").Style(button_css).HtmlAttributes(new { style = "border:none;padding:5px;display:inline-block;margin: 4px 2px;cursor: pointer;background-color:red;border-radius:100%;" })
+                                            </td>
+                                            <td>
+                                                <div class="inbox-toolbar btn-toolbar">
+                                                    <div class="btn-group ml-1 d-none d-lg-flex">
+                                                        @if (item.GetStatus() != "Active")
+                                                        {
+                                                            @Html.Bootstrap().ActionLinkButton("", "Show", "Users").RouteValues(new { roleName = roleName, @id = item.DisplayId }).Class("text-center btn btn-primary").AppendIcon("fa fa-eye").HtmlAttributes(new { style = "font-size:10px;" })
+                                                            @Html.Bootstrap().ActionLinkButton("", "Subscription", "Users").RouteValues(new { DisplayId = item.DisplayId }).Class("text-center btn btn-success").AppendIcon("fa fa-money").HtmlAttributes(new { style = "font-size:10px;" })
+
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.Bootstrap().ActionLinkButton("", "Show", "Users").RouteValues(new { roleName = roleName, @id = item.DisplayId }).Class("text-center btn btn-primary").AppendIcon("fa fa-eye").HtmlAttributes(new { style = "font-size:10px;" })
+
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        }
+                        else
+                        {
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Is Account Active?</th>
+                                    <th>Actions</th>
+                                                              
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Users.Count() > 0)
+                                {
+                                    foreach (var item in Model.Users)
+                                    {
+                                        var css = item.GetStatusCssClass();
+                                        ButtonStyle button_css = BwinoTips.WebUI.Infrastructure.Helpers.UserHelper.GetButtonStyle(css);
+
+                                        <tr class="@css">
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="font-size:15px;">
+                                                        @Html.ActionLink(String.Format("{1}, {0}", item.FirstName, item.LastName), "Show", "Users", routeValues: new { roleName = roleName, @id = item.DisplayId }, htmlAttributes: null)
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="font-size:15px;">@item.PhoneNumber</span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft" style="text-transform: lowercase;font-size:15px;">@Html.EmailLink(item.Email)</span>
+                                                </div>
+                                            </td>
+
+                                          
+                                            <td>
+                                                <div>
+                                                    <span class="badge badge-primary-soft"style="font-size:15px;">@InputHelper.ParseBool(item.EmailConfirmed)</span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="inbox-toolbar btn-toolbar">
+                                                    <div class="btn-group ml-1 d-none d-lg-flex">
+                                                      
+                                                            @Html.Bootstrap().ActionLinkButton("", "Show", "Users").RouteValues(new { roleName = roleName, @id = item.DisplayId }).Class("text-center btn btn-primary").AppendIcon("fa fa-eye").HtmlAttributes(new { style = "font-size:10px;" })
+
+                                                     
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        }
+
+                    </table>
+                </div>
+
+
+                <div class="card-footer">
+                    <div class="clearfix">
+                        <div class="pull-right">
+                            <div class="pagination-panel">
+                                <div class="pagination-labels">@Model.PagingInfo.ItemsFrom to @Model.PagingInfo.ItemsTo of @Model.PagingInfo.TotalItems @ViewBag.Title</div>
+                                @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

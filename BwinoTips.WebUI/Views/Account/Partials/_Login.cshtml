@@ -1,0 +1,32 @@
+﻿@model BwinoTips.WebUI.Models.Account.LoginViewModel
+
+
+<div class="panel">
+    <div class="divider font-weight-bold text-uppercase text-dark d-table text-center my-3">Sign in to your account!</div>
+    @using (Html.BeginForm("Login", "Account", new { @class = "register-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Bootstrap().TextBoxFor(m => m.PhoneNumber).Placeholder().ShowValidationMessage(true).Class("form-control").HtmlAttributes(new { required = "" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+
+                    <div class="form-group">
+                        @Html.Bootstrap().PasswordFor(m => m.Password).Placeholder().HtmlAttributes(new { autocomplete = "off", id = "pass", type = "password", required = "" }).ShowValidationMessage(true).Class("form-control")
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        @Html.Bootstrap().CheckBoxFor(m => m.RememberMe).HtmlAttributes(new { type = "checkbox", id = "customCheck1" }).Class("custom-control-input")
+                        <label class="custom-control-label" for="customCheck1">Remember me next time </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block">Sign in</button>
+    }
+
+    <hr />
+    @Html.Bootstrap().ActionLink("Forgot your password", "ForgotPassword", "Account").AppendIcon("fa fa-question-circle ")
+
+</div>

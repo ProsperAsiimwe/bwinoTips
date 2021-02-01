@@ -1,0 +1,345 @@
+﻿@using BwinoTips.Domain.Models;
+@model BwinoTips.WebUI.Models.Exclusive.ExclusiveListViewModel
+@{
+    ViewBag.Title = "Games";
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cart = (Cart)Session["Cart"] == null ? null : (Cart)Session["Cart"];
+
+}
+
+                @if (isAdmin)
+                {
+                    
+                    <div class="row">
+
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex align-items-center justify-content-between">
+                                    <h2 class="fs-18 font-weight-bold mb-0">Exclusive Games</h2>
+
+                                    <div class="inbox-toolbar btn-toolbar">  
+                                        <div class="btn-group">                               
+                                            @Html.Bootstrap().ActionLinkButton("New Game", "New").Class("btn btn-success").AppendIcon("fa fa-plus").HtmlAttributes(new { style = "color:white;" })
+                                        </div>
+
+                                        <div class="btn-group ml-1 d-none d-lg-flex">
+                                            <div id="cart_holder">
+                                                @if (cart != null && cart.Lines.Count() > 0)
+                                                {
+                                                    @Html.Action("Summary", "Cart")
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn btn-danger">
+                                                        <i class="fa fa-times"></i>
+                                                        <span class="fa fa-clipboard"></span>
+                                                    </button>
+                                                }                   
+                                            </div>
+                                                                                                             
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    
+                                    <div class=table-responsive>
+                                        <!--<table class="table table-sm table-nowrap card-table">-->
+                                        <table class="table display table-bordered table-striped table-hover bg-white m-0 card-table">
+                                            <thead>
+                                                <tr>                                                   
+                                                    <th>Date</th>
+                                                    <th>Teams</th>
+                                                    <th>Tip</th>
+                                                    <th>Result</th>
+                                                    <th>League</th>
+                                                    <th>Odd</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if (Model.ExclusiveTips.Count() > 0)
+                                            {
+                                                foreach (var item in Model.ExclusiveTips)
+                                                {
+                                                    var css = item.GetStatusCssClass();
+                                                    ButtonStyle button_css = BwinoTips.WebUI.Infrastructure.Helpers.ExclusiveTipHelper.GetButtonStyle(css);
+
+                                                    <tr class="@css">                                                    
+
+                                                        <td> 
+                                                            <div>
+                                                                <span class="bg-violet badge avatar-text">@item.Date.ToShortDateString()</span>                                                                
+                                                           </div>
+                                                            <div>
+                                                                <span class="bg-violet badge avatar-text">@item.Date.ToShortTimeString()</span>
+                                                            </div>
+                                                           </td>
+                                                        <td>
+                                                            <div>
+                                                                <span class="badge badge-info">@item.HomeTeam Vs @item.AwayTeam</span>
+                                                            </div>                                                        
+                                                        </td>
+
+                                                        <td>
+                                                            <div>
+                                                                <span class="badge badge-success">@item.Tip</span>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div>
+                                                                <span class="badge badge-primary-soft">@(string.IsNullOrEmpty(item.Result) ? "N/P" : item.Result)</span>
+                                                            </div>                                                       
+                                                        </td>
+
+                                                        <td>
+                                                            <div>
+                                                                <span class="bg-red badge avatar-text">@item.League.Name</span>
+                                                            </div>
+                                                       </td>
+                                                        <td>
+                                                            <div>
+                                                                <span class="bg-yellow badge avatar-text">@item.Odd</span>
+                                                            </div>                                                       
+                                                        </td>
+
+                                                        <td id="outer">
+                                                            @Html.Bootstrap().ActionLinkButton("", "TipStatus").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Style(button_css).HtmlAttributes(new { style = "border:none;padding:5px;display:inline-block;margin: 4px 2px;cursor: pointer;background-color:red;border-radius:100%;" })
+                                                        @*@Html.Bootstrap().ActionLinkButton(item.Status.ToString(), "TipStatus").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Style(button_css).AppendIcon("fa fa-edit")*@                                                      
+                                                    </td>
+                                            <td> 
+                                                            
+                                        <div class="inbox-toolbar btn-toolbar">                                                              
+                                            <div class="btn-group ml-1 d-none d-lg-flex">                                            
+                                        @Html.Bootstrap().ActionLinkButton("", "Edit").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Class("text-center btn btn-primary").AppendIcon("fa fa-edit").HtmlAttributes(new { style = "font-size:12px;", title = "Edit Game" })
+                                        @Html.Bootstrap().ActionLinkButton("", "Delete").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Class("text-center btn btn-danger").AppendIcon("fa fa-trash").HtmlAttributes(new { style = "font-size:12px;", title = "Delete Game" })
+                                        @Html.Bootstrap().TextBox("quantity").Class("quantity").Value(1).HtmlAttributes(new { type = "number", style = "font-size:12px; !important;text-align:center;display:inline;max-width:50px;" }).Disabled(true)  
+                                        @Html.Bootstrap().Button().Style(ButtonStyle.Success).Data(new { ExclusiveTipId = item.ExclusiveTipId }).Class("add-product").Text("").AppendIcon("fa fa-check").HtmlAttributes(new { style = "font-size:12px;text-align:center;", title = "Add To Ticket" })                                                        
+                                            </div>                                                              
+                                        </div>                                                            
+                                            </td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="card-footer">
+                                        <div class="clearfix">
+                                            <div class="pull-right">
+                                                <div class="pagination-panel">
+                                                    <div class="pagination-labels">@Model.PagingInfo.ItemsFrom to @Model.PagingInfo.ItemsTo of @Model.PagingInfo.TotalItems Tips</div>
+                                                    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="col-md-12 col-lg-12 col-xl-2 mb-0">
+
+                            <div id="cart_holder">
+                                @if (cart != null && cart.Lines.Count() > 0)
+                                {
+                                    @Html.Action("Summary", "Cart")
+                                }
+                                else
+                                {
+                                    <div>
+                                        <span class="bg-red badge avatar-text">No New Ticket Items <i class="fa fa-times"></i></span>
+                                    </div>
+                                                                     
+                                }
+                            </div>                      
+
+                            </div>*@
+                    </div>
+                }
+
+@section Scripts{   
+
+<script src="~/Scripts/admin/admin-product.min.js?version=1"></script>
+}
+
+
+@*<section class="body-color">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="contact-box ts-grid-box">
+    <h3>@ViewBag.Title</h3>
+
+  
+ 
+
+
+                @if (isAdmin)
+                {
+                    <div class="text-right">
+                        @Html.Bootstrap().ActionLinkButton("Add New Tip", "New").Class("btn btn-primary solid blank").AppendIcon("fa fa-plus").HtmlAttributes(new { style = "background-color:green;color:white;" })
+                    </div>
+
+                }
+
+                <br /><hr />
+
+
+                @Html.Partial("Partials/_SearchExclusiveTips", Model.SearchModel)
+
+                <div class="row" style="overflow-x:scroll">
+                    <table id="DonDada">
+
+                        <thead>
+                            <tr>
+                                <th>Date / Time:</th>
+                                <th>Teams:</th>
+                                <th>Tip:</th>
+                                <th>Result:</th>
+                                <th>League:</th>
+                                <th>Odd:</th>
+                                <th>Status:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ExclusiveTips.Count() > 0)
+                            {
+                                foreach (var item in Model.ExclusiveTips)
+                                {
+                                    var css = item.GetStatusCssClass();
+                                    ButtonStyle button_css = BwinoTips.WebUI.Infrastructure.Helpers.ExclusiveTipHelper.GetButtonStyle(css);
+
+                                    <tr class="@css">
+                                        <td>
+                                            <div style="color:red">
+                                                <p>@item.Date</p>
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+
+                                            <!--Table Team opponanet Start-->
+                                            <div class="tb-opponanet-contant">
+                                                <!--Team 1 Start-->
+                                                <div class="tb-team-1">
+
+                                                    <div style="color:red">
+                                                        @item.HomeTeam
+                                                    </div>
+
+                                                </div>
+                                                <!--Team 1 End-->
+                                                <div>VS</div>
+                                                <!--Team 2 Start-->
+                                                <div class="tb-team-2">
+
+                                                    <div style="color:red">
+                                                        @item.AwayTeam
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Team 1 End-->
+                                            </div>
+                                            <!--Table Team opponanet End-->
+                                        </td>
+
+                                        <td>
+                                            <div style="color:green">
+                                                @item.Tip
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            <div style="color:blue">
+                                                @(string.IsNullOrEmpty(item.Result) ? "Not Played Yet" : item.Result)
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            @item.League.Name
+                                        </td>
+
+                                        <td>
+                                            @item.Odd
+                                        </td>
+
+                                        <td>
+
+                                            <div style="color:indigo">
+                                                @Html.Bootstrap().ActionLinkButton(item.Status.ToString(), "TipStatus").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Style(button_css).AppendIcon("fa fa-edit")
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+                                            <tr>
+                                                <td colspan="7">
+
+                                                    @if (isAdmin)
+                                                    {
+                                                        <div class="text-right">
+                                                            @Html.Bootstrap().ActionLinkButton("Edit", "Edit").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Style(ButtonStyle.Success).Class("btn btn-primary solid blank").HtmlAttributes(new { style = "background-color:green;" })
+                                                            @Html.Bootstrap().ActionLinkButton("Delete", "Delete").RouteValues(new { ExclusiveTipId = item.ExclusiveTipId }).Style(ButtonStyle.Danger).Class("btn btn-primary solid blank").HtmlAttributes(new { style = "background-color:red;" })
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+
+                                                </td>
+                                            </tr>
+
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7">There are no records matching your search criteria</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="clearfix">
+                    <div class="pull-right">
+                        <div class="pagination-panel">
+                            <div class="pagination-labels">@Model.PagingInfo.ItemsFrom to @Model.PagingInfo.ItemsTo of @Model.PagingInfo.TotalItems Tips</div>
+                            @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- grid box end -->
+
+
+        </div>
+            <!-- col end-->
+            <!-- col end-->
+
+
+            </div>
+        <!-- row end-->
+    </div>
+    <!-- container end-->
+</section>
+<!-- post wraper end-->*@
+
+

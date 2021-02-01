@@ -1,0 +1,133 @@
+﻿@model BwinoTips.WebUI.Models.Exclusive.ExclusiveListViewModel
+@{
+    ViewBag.Title = "Exclusive Tips";
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+}
+
+
+<marquee direction="scroll">
+    <h4><strong>Choose from our wide selection of 100% guaranteed wins exclusive tips.</strong></h4>
+</marquee>
+
+@Html.Partial("Partials/_SearchExclusiveTips", Model.SearchModel)
+
+<div class="row" style="overflow-x:scroll">
+    <table id="DonDada">
+
+        <thead>
+            <tr>
+                <th>Date/Time:</th>
+                <th>Teams:</th>
+                <th>Tip:</th>
+                <th>Result:</th>
+                <th>League:</th>
+                <th>Odd:</th>
+                <th>Status:</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model.CurrentUserActive)
+            {
+
+                if (Model.ExclusiveTips.Count() > 0)
+                {
+                    foreach (var item in Model.ExclusiveTips)
+                    {
+
+                        var css = item.GetStatusCssClass();
+                        ButtonStyle button_css = BwinoTips.WebUI.Infrastructure.Helpers.ExclusiveTipHelper.GetButtonStyle(css);
+
+                        <tr class="@css">
+                            <td>@item.Date</td>
+                            <td>
+
+                                <!--Table Team opponanet Start-->
+                                <div class="tb-opponanet-contant">
+                                    <!--Team 1 Start-->
+                                    <div class="tb-team-1">
+
+                                        <div style="color:red">
+                                            @item.HomeTeam
+                                        </div>
+
+                                    </div>
+                                    <!--Team 1 End-->
+                                    <div>VS</div>
+                                    <!--Team 2 Start-->
+                                    <div class="tb-team-2">
+
+                                        <div style="color:red">
+                                            @item.AwayTeam
+                                        </div>
+
+                                    </div>
+
+                                    <!--Team 1 End-->
+                                </div>
+                                <!--Table Team opponanet End-->
+                            </td>
+                            <td>@item.Tip</td>
+                            <td>
+                                <div style="color:blue">
+                                    @(string.IsNullOrEmpty(item.Result) ? "Not Played Yet" : item.Result)
+                                </div>
+
+                            </td>
+                            <td>
+                                @item.League.Name
+                            </td>
+
+                            <td>
+                                @item.Odd
+                            </td>
+
+                            <td>
+
+                                <div style="color:indigo">
+                                    @item.Status
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">There are no records matching your search criteria</td>
+                    </tr>
+                }
+
+            }
+
+            else if (Model.CurrentUserNew)
+            {
+                <tr>
+                    <td colspan="7"><h2 style="color:green;">Dear client, Welcome to @Settings.COMPANY_NAME . Please recharge your account with one of our packages to access 100% tips for all games across 50+ leagues around the globe.</h2></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7"><h2 style="color:red;">Dear client, we regret to inform you that your subscription has ended. Please recharge your account with one of our packages to access 100% tips for all games across 50+ leagues around the globe. </h2></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <div class="clearfix">
+        <div class="pull-right">
+            <div class="pagination-panel">
+                <div class="pagination-labels">@Model.PagingInfo.ItemsFrom to @Model.PagingInfo.ItemsTo of @Model.PagingInfo.TotalItems Tips</div>
+                @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

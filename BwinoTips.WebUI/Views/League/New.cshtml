@@ -1,0 +1,78 @@
+﻿@model BwinoTips.WebUI.Models.Leagues.LeagueViewModel
+
+@{
+    string action, cancel_url, buttonText, instr, glyph;
+    bool isAdmin = PageData["isAdmin"];
+
+    if (Model.LeagueId > 0)
+    {
+        cancel_url = Url.Action("Show", new { LeagueId = Model.LeagueId });
+        action = "Update";
+        buttonText = "Update League";
+        instr = "Modify the details and click Update to apply changes";
+        glyph = "fa fa-thumbs-up";
+        ViewBag.Title = "Update League";
+    }
+    else
+    {
+        cancel_url = Url.Action("Index");
+        action = "Create";
+        buttonText = "Create League";
+        instr = "Complete the form below and click Create to add a new League";
+        glyph = "fa fa-plus";
+        ViewBag.Title = "New League";
+    }
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h2 class="fs-18 font-weight-bold mb-0">Create A New Tip!</h2>
+                    <div class="inbox-toolbar btn-toolbar">
+                        <div class="btn-group">
+                            @Html.Bootstrap().ActionLinkButton("Back", "Index", "League").Class("btn btn-danger").PrependIcon("fa fa-arrow-left").HtmlAttributes(new { style = "color:white;", title = "Homepage" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                @using (var f = Html.Bootstrap().Begin(new Form(action, "League").FormMethod(FormMethod.Post)))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.LeagueId)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="col-md-6 pr-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(p => p.Name).Placeholder().Class("form-control").Label().HtmlAttributes(new { required = "", type = "text" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <div class="font-weight-600">
+                                    @f.FormGroup().TextBoxFor(p => p.Country).Placeholder().Class("form-control").Label().HtmlAttributes(new { required = "", type = "text" })
+                                </div>
+                            </div>
+                        </div>
+                                             
+                      
+                    </div>                
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-fill btn-primary">@buttonText</button>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

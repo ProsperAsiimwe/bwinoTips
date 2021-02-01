@@ -1,0 +1,86 @@
+﻿@model BwinoTips.WebUI.Models.Leagues.LeagueListViewModel
+@{
+    ViewBag.Title = "Leagues";
+}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-4">
+
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="fs-18 font-weight-bold mb-0">@ViewBag.Title</h2>
+
+                <div class="inbox-toolbar btn-toolbar">
+                    <div class="btn-group">
+                        @Html.Bootstrap().ActionLinkButton("New League", "New").Class("btn btn-success").AppendIcon("fa fa-plus").HtmlAttributes(new { style = "color:white;" })
+                    </div>
+                </div>
+            </div>
+
+                    <div class="card-body">
+
+                        <div class=table-responsive>
+                            <!--<table class="table table-sm table-nowrap card-table">-->
+                            <table class="table display table-bordered table-striped table-hover bg-white m-0 card-table">
+                                <thead>
+                                    <tr>
+                                        <th>League / Competition</th>
+                                        <th>Country</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Leagues.Count() > 0)
+                                    {
+                                        foreach (var item in Model.Leagues)
+                                        {
+                                         
+                                            <tr>
+                                                                                              
+                                                <td>
+                                                    <div>
+                                                        <span class="badge badge-info">@item.Name</span>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div>
+                                                        <span class="badge badge-success">@item.Country</span>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+
+                                                    <div class="inbox-toolbar btn-toolbar">
+                                                        <div class="btn-group ml-1 d-none d-lg-flex">                                                          
+                                                            @Html.Bootstrap().ActionLinkButton("", "Edit").RouteValues(new { LeagueId = item.LeagueId }).Class("text-center btn btn-primary").AppendIcon("fa fa-edit").HtmlAttributes(new { style = "font-size:10px;" })
+                                                            @Html.Bootstrap().ActionLinkButton("", "Delete").RouteValues(new { LeagueId = item.LeagueId }).Class("text-center btn btn-danger").AppendIcon("fa fa-trash").HtmlAttributes(new { style = "font-size:10px;" })
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="clearfix">
+                                <div class="pull-right">
+                                    <div class="pagination-panel">
+                                        <div class="pagination-labels">@Model.PagingInfo.ItemsFrom to @Model.PagingInfo.ItemsTo of @Model.PagingInfo.TotalItems Leagues</div>
+                                        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+            </div>
+    </div>
+</div>
+          

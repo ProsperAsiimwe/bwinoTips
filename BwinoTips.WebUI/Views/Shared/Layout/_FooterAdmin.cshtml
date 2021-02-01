@@ -1,0 +1,74 @@
+﻿            <!--Footer Wrap Start-->
+<footer class="rgb-footer rgb-overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <!--Widget Text Start-->
+                <div class="widget widget-text">
+                    <h4 class="widget-title">About Us</h4>
+                    <div class="text">
+                        <p>@Settings.COMPANY_NAME</p>
+                    </div>
+
+
+                    <div class="text">
+                        <p>We are a betting group.</p>
+                    </div>
+
+
+                </div>
+                <!--Widget Text End-->
+            </div>
+
+            @*<div class="col-md-4 col-sm-6">
+                <!--Widget Navigation Start-->
+                <div class="widget widget-navbar">
+                    <h4 class="widget-title">Navigate</h4>
+                    <ul class="widget_nav">
+                        <li>@Html.Bootstrap().ActionLink("Exclusive Tips", "New", "Registration")</li>
+                        <li>@Html.Bootstrap().ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.Bootstrap().ActionLink("Become A Member", "New", "Registration")</li>
+                        <li>@Html.Bootstrap().ActionLink("Contact", "Contact", "Home")</li>
+
+                    </ul>
+                </div>
+                <!--Widget Navigation End-->
+            </div>*@
+
+            <div class="col-md-6 col-sm-6">
+                <!--Widget News Latter Start-->
+                <div class="widget widget-newslatter">
+                    <h4 class="widget-title">Contact</h4>
+
+                    <div class="rgb-ft-contact theme-border">
+                        <span>
+                            <strong>Phone</strong>
+                            <em>@Settings.COMPANY_PHONE</em>
+                        </span>
+                        <span>
+                            <strong>Email</strong>
+                            <em>@Settings.COMPANY_EMAIL</em>
+                        </span>
+                    </div>
+
+                </div>
+                <!--Widget News Latter End-->
+            </div>
+        </div>
+    </div>
+</footer>
+<!--Footer Wrap End-->
+<!--Footer Social Start-->
+<div class="rgb-social-wrap">
+    <ul class="kode-social-link">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+    </ul>
+</div>
+<!--Footer Social End-->
+<!--Copy Right Start-->
+<div class="rgb-copy-right">
+    <p>Copyright &copy; @DateTime.Today.Year, @Settings.COMPANY_NAME</p>
+</div>
+<!--Copy Right End-->

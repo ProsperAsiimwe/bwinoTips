@@ -1,0 +1,54 @@
+﻿@model BwinoTips.Domain.Entities.League
+@{
+    ViewBag.Title = "Restore League";
+}
+
+ <!--Inner Banner Start-->
+<div class="sub-banner rgb-overlay theme-border">
+    <div class="container">
+        <h3>@ViewBag.Title</h3>
+
+    </div>
+</div>
+<!--Inner Banner End-->
+
+<div class="col-md-12">
+
+    <div class="rgb-contact-wrap margin-bottom30">
+
+        <div class="col-md-12">
+            <!--Contact Contant Start-->
+            <div class="rgb-contact-contant rgb-white-style">
+                <h5>Are you sure you want to restore this league ?</h5>
+
+                <hr />
+                <div class="panel-item-group">
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">League's Name</div>
+                        <div class="col-sm-8">@Model.Name</div>
+                    </div>
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Country</div>
+                        <div class="col-sm-8">@Model.Country</div>
+                    </div>
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Added on</div>
+                        <div class="col-sm-8">@Model.Added</div>
+                    </div>
+
+                </div>
+
+                @using (Html.BeginForm("Restored", "League", new { LeagueId = Model.LeagueId }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Bootstrap().SubmitButton().Text("Restore League").Style(ButtonStyle.Danger).AppendIcon("glyphicon glyphicon-remove")
+                }
+
+            </div>
+            <!--Contact Contant End-->
+        </div>
+    </div>
+
+</div>
+
+

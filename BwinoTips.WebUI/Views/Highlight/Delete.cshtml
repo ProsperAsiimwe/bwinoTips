@@ -1,0 +1,42 @@
+﻿@model BwinoTips.Domain.Entities.Highlight
+
+@{
+    ViewBag.Title = "Delete Highlights";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string companyName = Settings.COMPANY_NAME;
+}
+<!-- post wraper start-->
+<section class="body-color">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="contact-box ts-grid-box">
+                    <h3>@ViewBag.Title</h3>
+
+                    <h5 style="color:red;">By doing this you'll terminate this highlight and delete all it's associated data.</h5>
+
+                    <div class="text-right">
+                        <h4>@Html.Bootstrap().ActionLink("Back", "Index", "Highlight").HtmlAttributes(new { title = "Homepage", @class = "" })</h4>
+                    </div>
+
+
+                    @using (Html.BeginForm("DeleteConfirmed", "Highlight", new { id = Model.HighlightId }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Bootstrap().SubmitButton().Text("Terminate Highlight").Style(ButtonStyle.Danger).AppendIcon("fa fa-remove")
+                    }
+
+
+                </div><!-- grid box end -->
+            </div>
+            <!-- col end-->
+            <!-- col end-->
+
+
+        </div>
+        <!-- row end-->
+    </div>
+    <!-- container end-->
+</section>
+<!-- post wraper end-->

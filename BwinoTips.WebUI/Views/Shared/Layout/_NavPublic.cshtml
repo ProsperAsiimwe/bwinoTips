@@ -1,0 +1,16 @@
+﻿@using BwinoTips.WebUI.Infrastructure.Helpers;
+@{
+    var active = ViewBag.Active;
+}
+<li class="@(active == "Home" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Home ", "Index", "Home").PrependIcon("fa fa-home mr-2")
+</li>
+
+<li class="@(active == "Registration" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Register ", "New", "Registration").PrependIcon("fa fa-user mr-2").RouteValues(new { roleName = "members" })
+</li>
+
+<li class="@(active == "Contact" ? "mm-active" : "")">
+    @Html.Bootstrap().ActionLink("Contact ", "Contact", "Home").PrependIcon("fa fa-phone-square mr-2")
+</li>
+   

@@ -1,0 +1,91 @@
+﻿@model BwinoTips.Domain.Entities.ExclusiveTip
+@{
+    ViewBag.Title = "Restore Exclusive Tip";
+}
+
+ <!--Inner Banner Start-->
+<div class="sub-banner rgb-overlay theme-border">
+    <div class="container">
+        <h3>@ViewBag.Title</h3>
+
+        <ul class="breadcrumb">
+            <li class="item-home">
+
+                @Html.Bootstrap().ActionLink("Back", "Index", "ExclusiveTip").HtmlAttributes(new { title = "Homepage", @class = "bread-link bread-home" })
+            </li>
+        </ul>
+
+    </div>
+</div>
+<!--Inner Banner End-->
+
+<div class="col-md-12">
+
+    <div class="rgb-contact-wrap margin-bottom30">
+
+        <div class="col-md-12">
+            <!--Contact Contant Start-->
+            <div class="rgb-contact-contant rgb-white-style">
+                <h5>Are you sure you want to restore this tip ?</h5>
+
+                <hr />
+                <div class="panel-item-group">
+                    <div class="panel-item clearfix">
+                      
+                        <div class="tb-opponanet-contant">
+                            <!--Team 1 Start-->
+                            <div class="tb-team-1">
+                                @Model.HomeTeam
+                            </div>
+                            <!--Team 1 End-->
+                            <div class="text">VS</div>
+                            <!--Team 2 Start-->
+                            <div class="tb-team-2">
+                                @Model.AwayTeam
+                            </div>
+                            <!--Team 1 End-->
+                        </div>
+
+                    </div>
+
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Tip</div>
+                        <div class="col-sm-8">@Model.Tip</div>
+                    </div>
+
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Result</div>
+                        <div class="col-sm-8">@Model.Result</div>
+                    </div>
+
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Date</div>
+                        <div class="col-sm-8">@Model.Date</div>
+                    </div>
+
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Status</div>
+                        <div class="col-sm-8">@Model.Status</div>
+                    </div>
+
+                    <div class="panel-item clearfix">
+                        <div class="col-sm-4 panel-item-label">Added on</div>
+                        <div class="col-sm-8">@Model.Added</div>
+                    </div>
+
+                </div>
+
+                @using (Html.BeginForm("Restored", "ExclusiveTip", new { ExclusiveTipId = Model.ExclusiveTipId }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Bootstrap().SubmitButton().Text("Restore Tip").Style(ButtonStyle.Danger).AppendIcon("glyphicon glyphicon-remove")
+                }
+
+            </div>
+            <!--Contact Contant End-->
+        </div>
+    </div>
+
+</div>
+
+

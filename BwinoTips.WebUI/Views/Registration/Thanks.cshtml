@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Thank You For Registering";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string roleName = "members";
+    string roleTitle = "Member";
+   
+}
+
+
+<div class="row">
+
+    <div class="col-lg-12 col-xl-12">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <div class="row justify-content-center">
+                    <div class="greet-user col-12 col-xl-6">
+                        <img src="~/Content/coreAssets/dist/img/logo/logo.png" alt="..." class="img-fluid  mb-2" style="height:120px;width:120px;">
+                                           
+                        <div class="panel">
+                            <div class="divider font-weight-600 text-uppercase text-black d-table text-center my-3 text-size-3">@ViewBag.Title ! You can now proceed to @Html.Bootstrap().ActionLink("LOGIN", "Index", "Home").HtmlAttributes(new { style = "color:green;" })</div>
+                           
+                        </div>
+
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

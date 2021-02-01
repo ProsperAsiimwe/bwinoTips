@@ -1,0 +1,173 @@
+﻿@model BwinoTips.WebUI.Models.Tickets.TicketListViewModel
+@{
+    ViewBag.Title = "Exclusive Tips";
+    bool isAdmin = User.IsInRole("Admin") || User.IsInRole("Developer");
+}
+
+
+  
+        @if (Model.CurrentUserActive)
+        {
+            if (Model.Tickets.Count() > 0)
+            {
+                foreach (var item in Model.Tickets)
+                {
+                    <div class="col-md-12 col-lg-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="fs-15 font-weight-600 mb-0">@item.TicketType.ToString() Ticket,  @item.TotalOdds.ToString("0.00") Odd(s)</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="list-group list-group-flush">
+                                @foreach (var game in item.Items)
+                                {
+                                    <a class="list-group-item list-group-item-action">
+                                        <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="@game.ExclusiveTip.Teams" data-original-title="" title="">
+                                            <div>
+                                                <span class="avatar bg-success text-white rounded-circle">@game.ExclusiveTip.Odd</span>
+
+                                            </div>
+                                            <br />
+                                            <div class="flex-fill ml-3" style="font-size:15px;">
+                                                <h6 class="fs-15 font-weight-600 mb-0">@game.ExclusiveTip.Teams </h6>
+                                                <span class="badge badge-success">Tip: @game.ExclusiveTip.Tip</span>
+                                                <small class="float-right text-muted">@game.ExclusiveTip.DateandTime</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+
+
+                        </div>
+                    </div>
+                }
+            }
+
+        }
+        else if (Model.CurrentUserNew)
+        {            
+                <div class="col-md-12 col-lg-12 col-xl-12">
+
+                    <div class="row">
+
+                        <div class="col-lg-12 col-xl-6">
+                            <!--Revenue today indicator-->
+                            <div class="p-2 bg-white rounded p-3 mb-3 shadow-sm">
+                                <div class="header-pretitle text-muted fs-20 font-weight-bold text-uppercase mb-2" style="color:green;font-size:25px;">
+                                    Dear client, Welcome to @Settings.COMPANY_NAME . Please recharge your account with mobile money to any of our packages to access 100% tips for all games across 50+ leagues around the globe.
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col" style="font-size:25px;">
+                                        <img width="50" height="50" src="~/Content/coreAssets/dist/img/credit/mtn.png" />
+                                        <div class="text-monospace">0785951227</div>
+                                    </div>
+                                    <div class="col" style="font-size:25px;">
+                                        <img width="50" height="50" src="~/Content/coreAssets/dist/img/credit/airtel.png" />
+                                        <div class="text-monospace">0704229146</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-xl-6">
+                            <div class="d-flex position-relative overflow-hidden flex-column p-3 mb-3 bg-white shadow-sm rounded">
+                                <div class="header-pretitle text-muted fs-11 font-weight-bold text-uppercase mb-2">Our paid subscriptions</div>
+                                <i class="fas fa fa-smile opacity-25 fa-5x text-warning decorative-icon"></i>
+
+                                <div class="text-muted" style="font-size:25px;">
+                                    <strong> WEEKLY SUBSCRIPTIONS</strong>
+                                    <span class="text-success text-size-20 text-monospace">
+                                        20,000 Ugx
+                                    </span>
+                                </div>
+
+                                <div class="text-muted" style="font-size:25px;">
+                                    <strong>MONTLY SUBSCRIPTIONS</strong>
+                                    <span class="text-success text-size-20 text-monospace">
+                                        50,000 Ugx
+                                    </span>
+                                </div>
+
+                                <div class="text-muted" style="font-size:25px;">
+                                    <strong>YEARLY SUBSCRIPTIONS</strong>
+                                    <span class="text-success text-size-20 text-monospace">
+                                        150,000 Ugx
+                                    </span>
+                                </div>
+
+                            </div>   
+                        </div>
+
+                        </div>
+                                                       
+                </div>
+
+        }
+        else
+        {
+
+            <div class="col-md-12 col-lg-12 col-xl-12">
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-xl-6">
+                        <!--Revenue today indicator-->
+                        <div class="p-2 bg-white rounded p-3 mb-3 shadow-sm">
+                            <div class="header-pretitle text-muted fs-20 font-weight-bold text-uppercase mb-2" style="color:green;font-size:25px;">
+                                Dear client, Welcome to @Settings.COMPANY_NAME . Please recharge your account with mobile money to any of our packages to access 100% tips for all games across 50+ leagues around the globe.
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="font-size:25px;">
+                                    <img width="50" height="50" src="~/Content/coreAssets/dist/img/credit/mtn.png" />
+                                    <div class="text-monospace">0785951227</div>
+                                </div>
+                                <div class="col" style="font-size:25px;">
+                                    <img width="50" height="50" src="~/Content/coreAssets/dist/img/credit/airtel.png" />
+                                    <div class="text-monospace">0704229146</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="d-flex position-relative overflow-hidden flex-column p-3 mb-3 bg-white shadow-sm rounded">
+                            <div class="header-pretitle text-muted fs-11 font-weight-bold text-uppercase mb-2">Our paid subscriptions</div>
+                            <i class="fas fa fa-smile opacity-25 fa-5x text-warning decorative-icon"></i>
+
+                            <div class="text-muted" style="font-size:25px;">
+                                <strong> WEEKLY SUBSCRIPTIONS</strong>
+                                <span class="text-success text-size-20 text-monospace">
+                                    20,000 Ugx
+                                </span>
+                            </div>
+
+                            <div class="text-muted" style="font-size:25px;">
+                                <strong>MONTLY SUBSCRIPTIONS</strong>
+                                <span class="text-success text-size-20 text-monospace">
+                                    50,000 Ugx
+                                </span>
+                            </div>
+
+                            <div class="text-muted" style="font-size:25px;">
+                                <strong>YEARLY SUBSCRIPTIONS</strong>
+                                <span class="text-success text-size-20 text-monospace">
+                                    150,000 Ugx
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+                }

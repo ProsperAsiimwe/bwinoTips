@@ -1,0 +1,51 @@
+﻿@model BwinoTips.WebUI.Models.Leagues.SearchLeagueViewModel
+
+@using (Html.BeginForm("Index", "League", new { @class = "comment-form", id = "commentform" }))
+{    
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-4">
+                <div class="kf_commet_field">
+                    @Html.Bootstrap().TextBoxFor(m => m.Name).Placeholder().PrependIcon("fa fa-globe")
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="kf_commet_field">
+                    @Html.Bootstrap().TextBoxFor(m => m.Country).Placeholder().PrependIcon("fa fa-flag")
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <p class="form-submit">
+                    @Html.Bootstrap().SubmitButton().Text("Filter").Class("submit btn-1 theme-background").Name("method").Value("Filter").Style(ButtonStyle.Success)
+                </p>
+            </div>
+
+        </div>
+    </div>
+    
+}
+
+@*<div class="rgb-input width-255 input-select">
+    <select>
+        <option>All Fixtures</option>
+        <option>1</option>
+        <option>2</option>
+    </select>
+</div>
+<div class="rgb-input width-125 input-select">
+    <select>
+        <option>First XV</option>
+        <option>1</option>
+        <option>2</option>
+    </select>
+</div>
+<div class="rgb-input width-185 input-select">
+    <select>
+        <option>2016 - -2017</option>
+        <option>1</option>
+        <option>2</option>
+    </select>
+</div>*@

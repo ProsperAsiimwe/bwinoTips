@@ -1,0 +1,40 @@
+﻿@using BwinoTips.WebUI.Infrastructure.Helpers
+@model BwinoTips.Domain.Entities.ApplicationUser
+@{
+    ViewBag.Title = "Account Details";
+    string roleName = PageData["roleName"];
+
+    //bool developer = (bool)ViewBag.Developer;
+    bool developer = User.IsInRole("Developer");
+    var helper = new UserHelper(Model);
+    string[] roles = helper.GetUserRoles();
+}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                 <h2 class="fs-18 font-weight-bold mb-0">@ViewBag.Title</h2>
+                <div class="inbox-toolbar btn-toolbar">                
+                    <div class="btn-group">
+                        @Html.Bootstrap().ActionLink("", "Edit").Class("btn btn-primary").RouteValues(new { id = Model.DisplayId }).AppendIcon("fa fa-edit").HtmlAttributes(new { title = "Edit User", style = "color:white" })
+                     </div>                   
+                    <div class="btn-group ml-1 d-none d-lg-flex"> 
+                        @Html.Bootstrap().ActionLink("", "ResetPassword").Class("btn btn-success").RouteValues(new { id = Model.DisplayId }).AppendIcon("fa fa-lock").HtmlAttributes(new { title = "Reset Password", style = "color:white" })                      
+                       @Html.Bootstrap().ActionLink("", "Delete").RouteValues(new { id = Model.DisplayId }).Class("text-center btn btn-danger").AppendIcon("fa fa-trash").HtmlAttributes(new { title = "Delete User", style = "color:white" })
+                        @Html.Bootstrap().ActionLink("", "Index", "Users").Class("btn btn-info").HtmlAttributes(new { title = "Go Back"}).AppendIcon("fa fa-arrow-left")
+
+                    </div>
+                </div>             
+            </div>
+
+            <div class="card-body">
+
+                @Html.Partial("Partials/_Summary", Model)
+            </div>
+
+            </div>
+    </div>
+</div>
+
+
+

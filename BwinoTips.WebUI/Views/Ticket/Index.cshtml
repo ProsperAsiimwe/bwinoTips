@@ -1,0 +1,51 @@
+﻿@model BwinoTips.WebUI.Models.Tickets.TicketListViewModel
+
+
+@{
+    ViewBag.Title = "Ticket";
+}
+  
+<div class="row">
+    @if (Model.Tickets.Count() > 0)
+    {
+        foreach (var item in Model.Tickets)
+        {
+            <div class="col-md-12 col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="fs-17 font-weight-600 mb-0">#@item.TicketId @item.TicketType.ToString() Ticket,  @item.TotalOdds.ToString("0.00") Odd(s)</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-group list-group-flush">
+                        @foreach (var game in item.Items)
+                    {
+                            <a  class="list-group-item list-group-item-action">
+                                <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="@game.ExclusiveTip.Teams" data-original-title="" title="">
+                                    <div>
+                                        <span class="avatar bg-success text-white rounded-circle">@game.ExclusiveTip.Odd</span>
+                                       
+                                    </div>
+                                    <br />
+                                    <div class="flex-fill ml-3">
+                                        <h6 class="fs-18 font-weight-600 mb-0">@game.ExclusiveTip.Teams </h6>
+                                        <span class="badge badge-success">Tip: @game.ExclusiveTip.Tip</span>                                       
+                                        <small class="float-right text-muted">@game.ExclusiveTip.DateandTime</small>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    }
+</div>
+
+  
+
